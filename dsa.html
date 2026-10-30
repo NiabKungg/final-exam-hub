@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DSA Final Prep — ติวสอบ Final โครงสร้างข้อมูลและอัลกอริทึม</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-size='13' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3EDS%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<header class="site">
+  <div class="site-inner">
+    <a class="brand" href="index.html"><span class="logo">FE</span>Final Exam Hub</a>
+    <nav class="main">
+      <a href="index.html">หน้าแรก</a>
+      <a href="os.html">OS</a>
+      <a href="dsa.html" class="active">DSA</a>
+      <a href="db.html">Database</a>
+      <a href="se.html">SE</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" data-action="toggle-theme" title="สลับธีม" aria-label="สลับธีม">🌙</button>
+      <button class="icon-btn" id="menuBtn" title="เมนู" aria-label="เมนู">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<aside class="toc">
+  <div class="toc-head">สารบัญ DSA ▾</div>
+  <div class="toc-body">
+    <a href="#exam">🎯 แนวข้อสอบจากรุ่นพี่</a>
+    <a href="#vocab">1 · ศัพท์เติมคำ + Big-O</a>
+    <a href="#sorting">2 · Sorting ไล่ทีละ pass</a>
+    <a href="#quickmerge">3 · Quick &amp; Merge Sort</a>
+    <a href="#heap">4 · Heap / Priority Queue</a>
+    <a href="#bst">5 · BST (สร้าง + เติมโค้ด)</a>
+    <a href="#avl">6 · AVL Tree (Rotation)</a>
+    <a href="#splay">7 · Splay Tree</a>
+    <a href="#graph">8 · Kruskal &amp; Dijkstra</a>
+    <a href="#binstr">9 · Binary String (โปรแกรม)</a>
+    <a href="#checklist">✅ เช็กลิสต์ + แผ่น short note</a>
+  </div>
+</aside>
+
+<main>
+<section class="hero">
+  <div class="kicker">Data Structures &amp; Algorithms · Final Exam · สไลด์ L08–L12</div>
+  <h1>ติวสอบ Final DSA — "ครึ่งหนึ่งของข้อสอบคือวาด tree"</h1>
+  <p class="lead">รวมทุกเรื่องที่รุ่นพี่รีวิว: ไล่ sort ทีละ pass · Heap insert/remove ทีละสเต็ป · สร้าง BST ·
+  AVL rotation · Splay delete · Kruskal · Dijkstra · เขียนโปรแกรม Binary String — ทุกข้อมีภาพวาดทีละขั้นตอน</p>
+  <div class="meta"><span class="chip">📝 เขียนตอบ แสดงขั้นตอน + ผลลัพธ์สุดท้าย</span><span class="chip">📖 Short note ได้ 1 แผ่น</span><span class="chip">🌳 ออกทฤษฎีเกือบหมด แลปแค่ 1 ข้อ</span></div>
+</section>
+
+<h2 id="exam">🎯 แนวข้อสอบจากรุ่นพี่ (สองปีล่าสุด)</h2>
+<div class="grid2">
+<div class="box exam"><span class="bt">Final ปี 66 (อ.บุญหทัย + อ.สันธนะ)</span>
+<ol style="margin:6px 0 0;">
+<li>ชุดตัวเลข → แสดงขั้นตอน Sort แบบละเอียด + ผลลัพธ์สุดท้าย: <strong>Bubble, Insertion, Selection</strong></li>
+<li><strong>Priority Queue</strong> — ให้ tree มา ถ้า insert เลขนี้ tree ใหม่เป็นอย่างไร</li>
+<li><strong>BST</strong> — เติมโค้ดที่หาย 1 บรรทัด <code>searchIter(int key)</code> · สร้าง BST จากชุดตัวเลข</li>
+<li><strong>MST</strong> — แสดงขั้นตอนหา MST ด้วย <strong>Kruskal</strong></li>
+<li><strong>Shortest Path</strong> — แสดงขั้นตอน + ผลลัพธ์ (รูปแบบ Dijkstra เปลี่ยนเลข)</li>
+<li><strong>AVL</strong> — ให้ Unbalanced Tree มา แสดงขั้นตอนทำให้ Balance</li>
+</ol></div>
+<div class="box exam"><span class="bt">Final ปี 67 (รหัส 66)</span>
+<ol style="margin:6px 0 0;">
+<li>เติมคำจากตัวอักษร <strong>15 ข้อ</strong> เรื่อง Sort, Search, Big-O</li>
+<li>กำหนดตัวเลข → หา <strong>Quick Sort, Selection Sort, Insertion Sort</strong></li>
+<li>เขียน <strong>BST</strong> จากตัวเลข</li>
+<li><strong>Advance Tree</strong>: เขียน <strong>AVL</strong> · <strong>Delete Splay Tree</strong> · <strong>Min Heap</strong> · Delete Min Node</li>
+<li>หา <strong>Shortest Path</strong></li>
+<li>เขียนโปรแกรม <strong>Binary String</strong> รับ K โดย 1 ห้ามติดกัน</li>
+</ol></div>
+</div>
+
+<h2 id="vocab">1 · ศัพท์สำหรับข้อ "เติมคำ 15 ข้อ" + Big-O ที่ต้องรู้</h2>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ศัพท์</th><th>แปล/ความหมาย</th><th>จำง่าย</th></tr>
+  <tr><td><strong>Stable sort</strong></td><td>ข้อมูล key ซ้ำ "ไม่สลับลำดับเดิม"</td><td>Stable: Bubble, Insertion, Merge · Unstable: Selection, Quick, Heap</td></tr>
+  <tr><td><strong>In-place</strong></td><td>ไม่ใช้ memory เพิ่ม (O(1))</td><td>Bubble/Insertion/Selection/Heap ใช่ · Merge ไม่ใช่ (ต้องใช้ O(n))</td></tr>
+  <tr><td><strong>Comparison-based</strong></td><td>เรียงโดยการเทียบคู่</td><td>เร็วสุดแค่ O(n log n) · พวก Radix/Counting/Bucket หลุดกรอบนี้</td></tr>
+  <tr><td><strong>Pivot</strong></td><td>ตัวหมุนหลักของ Quick sort</td><td>pivot ดีที่สุด = median · แย่สุด = เรียงอยู่แล้ว → O(n²)</td></tr>
+  <tr><td><strong>Divide &amp; Conquer</strong></td><td>แบ่งย่อย-พิชิต-รวมกลับ</td><td>Quick (แบ่งรอบ pivot), Merge (แบ่งครึ่งตลอด)</td></tr>
+  <tr><td><strong>Heap property</strong></td><td>พ่อ ≥ ลูก (max) หรือ พ่อ ≤ ลูก (min)</td><td>heap เป็น "complete binary tree" เก็บใน array ได้</td></tr>
+  <tr><td><strong>Complete binary tree</strong></td><td>ทุกชั้นเต็ม ยกเว้นชั้นสุดท้ายชิดซ้าย</td><td>เงื่อนไขที่ทำให้ heap แปลงเป็น array ได้</td></tr>
+  <tr><td><strong>Balance factor</strong></td><td>BF = สูงซ้าย − สูงขวา (AVL)</td><td>ต้องอยู่ใน {−1, 0, +1} เสมอ ถ้าเกินต้อง rotate</td></tr>
+  <tr><td><strong>Spanning tree</strong></td><td>ต้นไม้ที่ครบทุก vertex เชื่อมถึงกัน ไม่มี cycle</td><td>MST = spanning tree ผลรวมน้ำหนักต่ำสุด</td></tr>
+  <tr><td><strong>Greedy</strong></td><td>เลือกที่ดีที่สุดทันทีทุกก้าว</td><td>Prim, Dijkstra, Kruskal เป็น greedy ทั้งหมด</td></tr>
+</table></div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>โครงสร้าง/อัลกอริทึม</th><th>Access/Search</th><th>Insert</th><th>Delete</th><th>หมายเหตุ</th></tr>
+  <tr><td>Bubble Sort</td><td colspan="3" class="num">Best O(n) / Avg-Worst O(n²)</td><td>เรียงแล้วแล้ว best = O(n) · stable · in-place</td></tr>
+  <tr><td>Insertion Sort</td><td colspan="3" class="num">Best O(n) / Avg-Worst O(n²)</td><td>เร็วจริงกับข้อมูลน้อย · stable · ข้อมูลเกือบเรียง = เกือบ O(n)</td></tr>
+  <tr><td>Selection Sort</td><td colspan="3" class="num">O(n²) ทุกกรณี (เทียบ)</td><td>swap น้อย (O(n)) · <strong>unstable</strong></td></tr>
+  <tr><td>Quick Sort</td><td colspan="3" class="num">Best-Avg O(n log n) / Worst O(n²)</td><td>worst เมื่อ pivot แย่ทุกรอบ · memory O(log n) (recursion)</td></tr>
+  <tr><td>Merge Sort</td><td colspan="3" class="num">O(n log n) ทุกกรณี</td><td>stable · ต้องใช้ array ช่วย O(n)</td></tr>
+  <tr><td>Heap Sort</td><td colspan="3" class="num">O(n log n) ทุกกรณี</td><td>unstable</td></tr>
+  <tr><td>Heap (insert/remove)</td><td>peek O(1)</td><td class="num">O(log n)</td><td class="num">O(log n)</td><td>สูงสุดเท่าความสูง tree = log n</td></tr>
+  <tr><td>BST เฉลี่ย / ทรุด</td><td class="num">O(log n) / O(n)</td><td class="num">O(log n) / O(n)</td><td class="num">O(log n) / O(n)</td><td>ทรุด = deformed กลายเป็น linked list</td></tr>
+  <tr><td>AVL / Red-Black / Splay</td><td colspan="3" class="num">O(log n) (Splay = amortized)</td><td>AVL สูงสุด h &lt; 1.44 log₂n · RB ใช้ใน Java TreeMap/TreeSet</td></tr>
+</table></div>
+
+<h2 id="sorting">2 · Sorting — ไล่ทีละ pass (โจทย์ให้ตัวเลขมาแล้ว "แสดงขั้นตอน")</h2>
+<p>ใช้ตัวอย่างเดียวกันทั้งสามอัลกอริทึม: <span class="pill">โจทย์</span> <code>7 3 9 1 5</code> (เรียงจากน้อยไปมาก)</p>
+
+<h3>2.1 Bubble Sort — เปรียบทีละคู่ ตัวใหญ่ "ลอย" ไปท้าย</h3>
+<div class="box tip"><span class="bt">เปรียบเทียบ</span>เหมือนจัดแถวนักเรียนตามส่วนสูงโดยยืนคู่กันเทียบทีละคู่จากหน้าไปหลัง — ผ่านรอบ (pass) ละ 1 รอบ คนที่สูงสุดที่ยังไม่ถูกล็อกจะถูกดันไปสุดท้ายพอดี</div>
+<div class="steps">
+  <div class="step"><h4>Pass 1 (เทียบ 4 คู่)</h4>
+    <div class="array"><span class="cell sw">7</span><span class="cell sw">3</span><span class="cell">9</span><span class="cell">1</span><span class="cell">5</span></div>เทียบ 7,3 → สลับ
+    <div class="array"><span class="cell">3</span><span class="cell">7</span><span class="cell">9</span><span class="cell">1</span><span class="cell">5</span></div>เทียบ 7,9 → อยู่ · เทียบ 9,1 → สลับ
+    <div class="array"><span class="cell">3</span><span class="cell">7</span><span class="cell">1</span><span class="cell">9</span><span class="cell">5</span></div>เทียบ 9,5 → สลับ
+    <div class="array"><span class="cell">3</span><span class="cell">7</span><span class="cell">1</span><span class="cell">5</span><span class="cell done">9</span></div><strong>จบ pass 1: ตัวใหญ่สุด (9) ไปท้ายแล้ว</strong></div>
+  <div class="step"><h4>Pass 2 (เทียบ 3 คู่)</h4>3,7 อยู่ · 7,1 สลับ · 7,5 สลับ
+    <div class="array"><span class="cell">3</span><span class="cell">1</span><span class="cell">5</span><span class="cell done">7</span><span class="cell done">9</span></div></div>
+  <div class="step"><h4>Pass 3 (เทียบ 2 คู่)</h4>3,1 สลับ · 3,5 อยู่
+    <div class="array"><span class="cell">1</span><span class="cell">3</span><span class="cell done">5</span><span class="cell done">7</span><span class="cell done">9</span></div></div>
+  <div class="step"><h4>Pass 4</h4>1,3 อยู่ → เรียงครบ: <strong>1 3 5 7 9</strong> (n−1 = 4 pass)</div>
+</div>
+<pre><code>void BubbleSort(int[] a, int n) {
+  for (int i = 0; i &lt; n - 1; i++)            <span class="cm">// n-1 pass</span>
+    for (int j = 0; j &lt; n - i - 1; j++)      <span class="cm">// โซนท้ายที่เรียงแล้วไม่ต้องเทียบ</span>
+      if (a[j] &gt; a[j+1]) swap(a[j], a[j+1]);
+}</code></pre>
+
+<h3>2.2 Insertion Sort — "เสียบการ์ด" ลงมือที่มีเรียงแล้ว</h3>
+<div class="box tip"><span class="bt">เปรียบเทียบ</span>เหมือนจัดไพ่ในมือ: หยิบใบใหม่มา 1 ใบ เลื่อนไพ่เก่าที่ใหญ่กว่าไปทางขวาทีละใบ แล้วเสียบลงช่องที่ถูก</div>
+<div class="steps">
+  <div class="step"><h4>หยิบ key = 3 (ตำแหน่ง 1)</h4>7 &gt; 3 เลื่อนขวา → <span class="array"><span class="cell new">3</span><span class="cell">7</span><span class="cell">9</span><span class="cell">1</span><span class="cell">5</span></span></div>
+  <div class="step"><h4>หยิบ key = 9</h4>7 &lt; 9 ไม่ต้องเลื่อน → <span class="array"><span class="cell">3</span><span class="cell">7</span><span class="cell new">9</span><span class="cell">1</span><span class="cell">5</span></span></div>
+  <div class="step"><h4>หยิบ key = 1</h4>9,7,3 ใหญ่กว่า → เลื่อน 3 ตัว → <span class="array"><span class="cell new">1</span><span class="cell">3</span><span class="cell">7</span><span class="cell">9</span><span class="cell">5</span></span></div>
+  <div class="step"><h4>หยิบ key = 5</h4>9,7 ใหญ่กว่า → เลื่อน 2 ตัว → <span class="array"><span class="cell">1</span><span class="cell">3</span><span class="cell new">5</span><span class="cell">7</span><span class="cell">9</span></span> <strong>เรียงแล้ว ✓</strong></div>
+</div>
+
+<h3>2.3 Selection Sort — เลือกตัวเล็กสุดมาวางหน้า</h3>
+<div class="box tip"><span class="bt">เปรียบเทียบ</span>สแกนหา "ตัวเล็กที่สุดที่เหลือ" แล้วสลับมาไว้หน้าสุดทีละตำแหน่ง — เหมือนเลือกกัปตันทีม: เลือกคนเก่งสุดใส่ทีมไปทีละคน</div>
+<div class="steps">
+  <div class="step"><h4>Pass 1</h4>สแกนทั้งแถว: น้อยสุด = 1 → สลับกับตำแหน่ง 0 → <span class="array"><span class="cell done">1</span><span class="cell">3</span><span class="cell">9</span><span class="cell">7</span><span class="cell sw">5</span></span> (สลับ 7↔1)</div>
+  <div class="step"><h4>Pass 2</h4>น้อยสุดของ [3,9,7,5] = 3 อยู่แล้ว → ไม่สลับ → <span class="array"><span class="cell done">1</span><span class="cell done">3</span><span class="cell">9</span><span class="cell">7</span><span class="cell">5</span></span></div>
+  <div class="step"><h4>Pass 3</h4>น้อยสุดของ [9,7,5] = 5 → สลับกับ 9 → <span class="array"><span class="cell done">1</span><span class="cell done">3</span><span class="cell done">5</span><span class="cell">7</span><span class="cell">9</span></span></div>
+  <div class="step"><h4>Pass 4</h4>[7,9] เรียงอยู่แล้ว → <strong>จบ: 1 3 5 7 9</strong></div>
+</div>
+<div class="box warn"><span class="bt">จุดต่างสำคัญ (ชอบออกถาม)</span><strong>Bubble = เทียบ "คู่ติดกัน" + สลับบ่อย</strong> · <strong>Insertion = แทรกเข้าโซนที่เรียงแล้ว</strong> · <strong>Selection = สแกนหา min แล้วสลับ "รอบเดียวต่อ pass"</strong> (swap น้อยสุด = O(n) สลับ) แต่เทียบครบ O(n²) เสมอ · Selection <strong>ไม่ stable</strong> เพราะการสลับไกล ๆ อาจข้ามตัวที่ key ซ้ำ</div>
+
+<h2 id="quickmerge">3 · Quick Sort &amp; Merge Sort (Divide &amp; Conquer)</h2>
+<h3>3.1 Quick Sort — เลือก pivot แล้วแบ่งฝั่งเล็ก-ใหญ่</h3>
+<div class="steps">
+  <div class="step"><h4>เลือก pivot (นิยมตัวขวาสุด) = 5</h4><span class="array"><span class="cell">7</span><span class="cell">3</span><span class="cell">9</span><span class="cell">1</span><span class="cell cm">5</span></span> — ตัวที่ ≤ pivot ย้ายซ้าย, &gt; pivot ย้ายขวา (partition)</div>
+  <div class="step"><h4>Partition ด้วยสองตัวชี้ i, j</h4>เดิน j: 7&gt;5 ข้าม · 3≤5 สลับกับตำแหน่ง i · 9&gt;5 ข้าม · 1≤5 สลับ · จบสลับ pivot กับตำแหน่ง i → ได้ <span class="array"><span class="cell">3</span><span class="cell">1</span><span class="cell new">5</span><span class="cell">7</span><span class="cell">9</span></span> — 5 ลงที่ "ถูกต้องถาวร" แล้ว</div>
+  <div class="step"><h4>Recursion ซ้าย [3,1]</h4>pivot=1 → ได้ [1,3] (1 ลงที่ถูก)</div>
+  <div class="step"><h4>Recursion ขวา [7,9]</h4>pivot=9 → ได้ [7,9] · รวมทั้งหมด: <strong>1 3 5 7 9 ✓</strong></div>
+</div>
+<p>Worst case O(n²) เกิดเมื่อ pivot แย่ตลอด (ข้อมูลเรียงอยู่แล้ว + เลือกปลาย) · เฉลี่ย/best = O(n log n)</p>
+<h3>3.2 Merge Sort — หักครึ่งจนเหลือ 1 แล้ว "รวม" กลับแบบเรียง</h3>
+<div class="fig"><svg viewBox="0 0 720 330" role="img" aria-label="merge sort diagram">
+  <g font-size="13" font-weight="700">
+    <rect x="290" y="10" width="140" height="30" rx="8" class="svg-n"/><text x="360" y="30" class="svg-t">7 3 9 1 5</text>
+    <rect x="160" y="70" width="120" height="30" rx="8" class="svg-n2"/><text x="220" y="90" class="svg-t">7 3</text>
+    <rect x="440" y="70" width="130" height="30" rx="8" class="svg-n2"/><text x="505" y="90" class="svg-t">9 1 5</text>
+    <rect x="80" y="130" width="90" height="30" rx="8" class="svg-n3"/><text x="125" y="150" class="svg-t">7 | 3</text>
+    <rect x="410" y="130" width="100" height="30" rx="8" class="svg-n3"/><text x="460" y="150" class="svg-t">9 | 1 5</text>
+    <text x="125" y="185" class="svg-t2">3 7 (merge)</text>
+    <text x="460" y="185" class="svg-t2">1 5 9 (merge 1+5→5? no: 1 กับ 5 9 → 1 5 9)</text>
+    <rect x="180" y="205" width="120" height="30" rx="8" class="svg-n3"/><text x="240" y="225" class="svg-t">3 7</text>
+    <rect x="430" y="205" width="120" height="30" rx="8" class="svg-n3"/><text x="490" y="225" class="svg-t">1 5 9</text>
+    <rect x="290" y="270" width="140" height="30" rx="8" class="svg-n"/><text x="360" y="290" class="svg-t">1 3 5 7 9</text>
+    <text x="360" y="322" class="svg-t2">merge สองก้อน: เทียบหัวแถวแล้วหยิบตัวเล็กทีละตัว</text>
+  </g>
+</svg><figcaption>รูป 1 — Merge sort: แบ่งลึกลงไปจนก้อนยาว 1 (เรียงโดยปริยาย) แล้ว merge กลับขึ้น</figcaption></div>
+
+<h2 id="heap">4 · Heap / Priority Queue — "insert แล้ว tree ใหม่หน้าตายังไง"</h2>
+<div class="box tip"><span class="bt">Priority Queue (ADT)</span>คิวที่ออกตาม<em>ความสำคัญ</em> ไม่ใช่ตามลำดับเข้า — เหมือน<em>ห้องฉุกเฉิน</em>: คนไข้วิกฤตเข้าก่อนแม้มาทีหลัง · นิยม implement ด้วย <strong>Heap</strong> · โจทย์ให้เป็น min-heap เกือบตลอด (ราก = น้อยสุด)</div>
+<h3>4.1 หลักบ้าน: แปลง heap ↔ array</h3>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ตำแหน่ง</th><th>สูตร (index เริ่ม 0)</th><th>เทียบเป็นคน</th></tr>
+  <tr><td>ลูกซ้ายของ i</td><td class="num">2i + 1</td><td rowspan="3">พ่อ "จับคู่" ลูกสองคนใน array — เพราะ heap เป็น complete tree จึงแน่นไม่มีรู จึง map ลง array ได้เป๊ะ</td></tr>
+  <tr><td>ลูกขวาของ i</td><td class="num">2i + 2</td></tr>
+  <tr><td>พ่อของ i</td><td class="num">(i − 1) / 2</td></tr>
+</table></div>
+<h3>4.2 Insert (percolate UP — ลอยขึ้น) ⭐ แนวข้อสอบตรง</h3>
+<p>โจทย์จากสไลด์: min-heap ปัจจุบัน</p>
+<div class="fig"><svg viewBox="0 0 700 260" role="img" aria-label="heap before insert">
+  <g><line x1="350" y1="60" x2="230" y2="140" class="svg-edge"/><line x1="350" y1="60" x2="470" y2="140" class="svg-edge"/>
+  <line x1="230" y1="140" x2="150" y2="220" class="svg-edge"/><line x1="230" y1="140" x2="310" y2="220" class="svg-edge"/>
+  <line x1="470" y1="140" x2="550" y2="220" class="svg-edge"/></g>
+  <rect x="315" y="35" width="70" height="46" rx="10" class="svg-n"/><text x="350" y="58" class="svg-t">2</text>
+  <rect x="195" y="115" width="70" height="46" rx="10" class="svg-n"/><text x="230" y="138" class="svg-t">5</text>
+  <rect x="435" y="115" width="70" height="46" rx="10" class="svg-n"/><text x="470" y="138" class="svg-t">4</text>
+  <rect x="115" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="150" y="218" class="svg-t">7</text>
+  <rect x="275" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="310" y="218" class="svg-t">9</text>
+  <rect x="515" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="550" y="218" class="svg-t">8</text>
+  <text x="350" y="258" class="svg-t2">Array: [2, 5, 4, 7, 9, 8]</text>
+</svg><figcaption>รูป 2 — Min-heap ตั้งต้น (พ่อ ≤ ลูก ทุกคู่)</figcaption></div>
+<div class="box exam"><span class="bt">โจทย์: insert(3) → tree ใหม่เป็นอย่างไร?</span>
+<div class="steps">
+  <div class="step"><h4>วาง 3 ไว้ "ช่องว่างถัดไป" ของ complete tree</h4>ช่องถัดไป = ลูกขวาของ 4 (array index 6) — <span class="pill">ห้ามวางยังอื่น!</span></div>
+  <div class="step"><h4>เทียบกับพ่อ: 3 &lt; 4 → สลับขึ้น</h4>ลอยขึ้น 1 ชั้น (array: 3 เข้าไปแทนตำแหน่ง 2)</div>
+  <div class="step"><h4>เทียบพ่อใหม่: 3 &gt; 2 → หยุด</h4>พ่อน้อยกว่า = heap property โอเคแล้ว จบ</div>
+</div>
+<div class="fig"><svg viewBox="0 0 700 260" role="img" aria-label="heap after insert 3">
+  <g><line x1="350" y1="60" x2="230" y2="140" class="svg-edge"/><line x1="350" y1="60" x2="470" y2="140" class="svg-edge"/>
+  <line x1="230" y1="140" x2="150" y2="220" class="svg-edge"/><line x1="230" y1="140" x2="310" y2="220" class="svg-edge"/>
+  <line x1="470" y1="140" x2="550" y2="220" class="svg-edge"/><line x1="470" y1="140" x2="390" y2="220" class="svg-edge"/></g>
+  <rect x="315" y="35" width="70" height="46" rx="10" class="svg-n"/><text x="350" y="58" class="svg-t">2</text>
+  <rect x="195" y="115" width="70" height="46" rx="10" class="svg-n"/><text x="230" y="138" class="svg-t">5</text>
+  <rect x="435" y="115" width="70" height="46" rx="10" class="svg-n3"/><text x="470" y="138" class="svg-t">3</text>
+  <rect x="115" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="150" y="218" class="svg-t">7</text>
+  <rect x="275" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="310" y="218" class="svg-t">9</text>
+  <rect x="355" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="390" y="218" class="svg-t">8</text>
+  <rect x="515" y="195" width="70" height="46" rx="10" class="svg-n4"/><text x="550" y="218" class="svg-t">4</text>
+  <text x="350" y="258" class="svg-t2">Array ใหม่: [2, 5, 3, 7, 9, 8, 4] — 3 สลับกับ 4 หนึ่งรอบแล้วจบ</text>
+</svg><figcaption>รูป 3 — หลัง insert(3): ทางขึ้นของ 3 ยาวแค่ไหนขึ้นกับค่า — สูงสุด log n ครั้ง → O(log n)</figcaption></div>
+</div>
+<h3>4.3 RemoveMin (percolate DOWN — จมลง) + "Delete Min Node"</h3>
+<div class="steps">
+  <div class="step"><h4>เก็บราก (น้อยสุด) ออก</h4>ตัวที่หายไปคือคำตอบของ dequeue()</div>
+  <div class="step"><h4>ยก "ใบสุดท้าย" มาแทนราก</h4>ตัวสุดท้ายของ array ย้ายมา index 0 — <span class="pill">ห้ามใช้ลูกซ้าย/ขวามาแทน!</span></div>
+  <div class="step"><h4>จมลง: เทียบกับลูกที่ "น้อยกว่า"</h4>ถ้าใหญ่กว่าลูกน้อยกว่า → สลับกับลูกตัวนั้น · ทำซ้ำจนเล็กกว่าลูกทั้งคู่ หรือไม่มีลูก</div>
+</div>
+<div class="box ok"><span class="bt">3 เคสตอนจมลง (จากสไลด์)</span>① <strong>ไม่มีลูก</strong> → จบทันที ② <strong>มีลูกเดียว (ซ้าย)</strong> → เทียบแล้วสลับได้ ③ <strong>มีสองลูก</strong> → สลับกับ <strong>ลูกที่น้อยกว่า</strong> เท่านั้น (สลับกับตัวใหญ่แล้ว heap พัง!)</div>
+<p>นี่คือเหตุผลที่ <strong>Heap Sort</strong> ทำงานได้: ถ่ายข้อมูลทั้งหมดลง heap แล้ว removeMin วนจนหมด → ได้ลำดับเรียง · ถามว่า "ลำดับเดิมใครมาก่อนรับประกันไหม?" — <strong>heap ไม่รับประกัน stability</strong> (ค่าซ้ำอาจออกสลับกัน)</p>
+
+<h2 id="bst">5 · Binary Search Tree — สร้างจากตัวเลข + เติมโค้ด</h2>
+<div class="box tip"><span class="bt">กฎเหล็ก BST</span>ทุก node: <strong>ค่าซ้ายทั้ง subtree &lt; ตัวเอง &lt; ค่าขวาทั้ง subtree</strong> — เหมือน<em>สารบัญหนังสือที่จัดกลุ่มเลข</em>: อยากหาค่าอะไรแค่เดิน "เล็กกว่า → ซ้าย / ใหญ่กว่า → ขวา" ครึ่งทรีทิ้งทุกชั้น → O(log n) · ถ้าใส่ข้อมูลเรียงแล้วจะทรุดเป็น linked list → O(n) (ต้นไม้ตัวโกง — จึงต้องมี AVL)</div>
+<h3>5.1 สร้าง BST จาก <code>7 20 5 15 10 4 33 2 25 6</code> (ตัวอย่างในสไลด์)</h3>
+<div class="steps">
+  <div class="step"><h4>7 → ราก</h4>ตัวแรกเสมอเป็นราก</div>
+  <div class="step"><h4>20 &gt; 7 → ขวาของ 7 · 5 &lt; 7 → ซ้ายของ 7</h4>ต่อกิ่งทีละตัว เทียบจากรากลงมาเสมอ</div>
+  <div class="step"><h4>15: &gt;7 → ขวา, &lt;20 → ซ้ายของ 20</h4>10: &gt;7, &lt;20, &lt;15 → ซ้ายของ 15</div>
+  <div class="step"><h4>4: &lt;7, &lt;5 → ซ้ายของ 5</h4>33: &gt;7, &gt;20 → ขวาของ 20</div>
+  <div class="step"><h4>2: &lt;7, &lt;5, &lt;4 → ซ้ายของ 4</h4>25: &gt;7, &gt;20, &lt;33 → ซ้ายของ 33 · 6: &lt;7, &gt;5 → ขวาของ 5</div>
+</div>
+<div class="fig"><svg viewBox="0 0 720 330" role="img" aria-label="BST final">
+  <g><line x1="360" y1="60" x2="220" y2="140" class="svg-edge"/><line x1="360" y1="60" x2="500" y2="140" class="svg-edge"/>
+  <line x1="220" y1="140" x2="150" y2="220" class="svg-edge"/><line x1="220" y1="140" x2="290" y2="220" class="svg-edge"/>
+  <line x1="500" y1="140" x2="430" y2="220" class="svg-edge"/><line x1="500" y1="140" x2="570" y2="220" class="svg-edge"/>
+  <line x1="150" y1="220" x2="110" y2="290" class="svg-edge"/>
+  <line x1="430" y1="220" x2="390" y2="290" class="svg-edge"/><line x1="570" y1="220" x2="530" y2="290" class="svg-edge"/></g>
+  <rect x="325" y="35" width="70" height="46" rx="10" class="svg-n"/><text x="360" y="58" class="svg-t">7</text>
+  <rect x="185" y="115" width="70" height="46" rx="10" class="svg-n"/><text x="220" y="138" class="svg-t">5</text>
+  <rect x="465" y="115" width="70" height="46" rx="10" class="svg-n"/><text x="500" y="138" class="svg-t">20</text>
+  <rect x="115" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="150" y="218" class="svg-t">4</text>
+  <rect x="255" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="290" y="218" class="svg-t">6</text>
+  <rect x="395" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="430" y="218" class="svg-t">15</text>
+  <rect x="535" y="195" width="70" height="46" rx="10" class="svg-n"/><text x="570" y="218" class="svg-t">33</text>
+  <rect x="75" y="265" width="70" height="46" rx="10" class="svg-n"/><text x="110" y="288" class="svg-t">2</text>
+  <rect x="355" y="265" width="70" height="46" rx="10" class="svg-n"/><text x="390" y="288" class="svg-t">10</text>
+  <rect x="495" y="265" width="70" height="46" rx="10" class="svg-n"/><text x="530" y="288" class="svg-t">25</text>
+</svg><figcaption>รูป 4 — BST ผลลัพธ์ · เช็กตัวเอง: in-order traversal ต้องได้เรียง 2 4 5 6 7 10 15 20 25 33 เสมอ!</figcaption></div>
+<h3>5.2 เติมโค้ด <code>searchIter(int key)</code> (ข้อเติม 1 บรรทัด — จากสไลด์ตรง ๆ)</h3>
+<pre><code>public TreeNode searchIter(int key) {
+    TreeNode current = root;
+    while (current != null) {
+        if (key == current.data) return current;
+        if (key <span class="hl-line">&lt; current.data) current = current.left;</span>
+        else current = current.right;
+    }
+    return null;   <span class="cm">// เดินหลุดต้น = ไม่เจอ</span>
+}</code></pre>
+<div class="box warn"><span class="bt">จำแนวเติมโค้ด BST</span>เงื่อนไขสามแบบเสมอ: <code>==</code> คืน node · <code>&lt;</code> ไปซ้าย · ไม่ใช่ไปขวา · ถ้าโจทย์เติม<em>insert</em>: เจอช่องว่าง (left/right == null) → <code>current.left = new TreeNode(d)</code> อย่าลืมตั้ง parent ถ้า class มี parent</div>
+<h3>5.3 Delete 3 เคส</h3>
+<div class="grid3">
+<div class="card"><h4>① ใบ (leaf)</h4><p>ดึงออกเลย จบ</p></div>
+<div class="card"><h4>② ลูกเดียว</h4><p>ดึงตัวเองออก แล้ว "โยงพ่อไปหาลูก" แทน</p></div>
+<div class="card"><h4>③ สองลูก (ยากสุด)</h4><p>หา <strong>max ของซับต้นซ้าย</strong> (หรือ min ของขวา) มาแทนตำแหน่ง แล้ว delete ตัวที่ยกมาออกจากที่เดิม — เหมือนเอา "รองชนะเลิศ" ขึ้นแทนแชมป์ที่ถอนตัว</p></div>
+</div>
+<h4>Traversal 3 แบบ (ออกเป็นทฤษฎี)</h4>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>แบบ</th><th>ลำดับ</th><th>เคล็ดจำ</th><th>ผลกับ BST</th></tr>
+  <tr><td>Pre-order</td><td>Root → Left → Right</td><td>"ตัวเองก่อน"</td><td>เหมาะ copy tree</td></tr>
+  <tr><td>In-order</td><td>Left → Root → Right</td><td>"ตัวเองอยู่กลาง"</td><td><strong>ได้ตัวเลขเรียงน้อย→มาก</strong> (ออกบ่อย!)</td></tr>
+  <tr><td>Post-order</td><td>Left → Right → Root</td><td>"ตัวเองทีหลัง"</td><td>เหมาะลบ/ปล่อย tree</td></tr>
+</table></div>
+
+<h2 id="avl">6 · AVL Tree — นับ Balance Factor แล้วหมุน</h2>
+<div class="box tip"><span class="bt">หัวใจ 2 บรรทัด</span>① <strong>BF = ความสูงซ้าย − ความสูงขวา</strong> ต้องเป็น −1, 0, +1 เท่านั้น (leaf สูง 0, ช่องว่าง = −1) · ② ถ้า BF = ±2 ต้อง "หมุน" ตามทางที่ insert เข้า: <strong>นอก (LL/RR) หมุนเดียว · ใน (LR/RL) หมุนสองรอบ</strong></div>
+<h3>6.1 ทั้ง 4 เคส (วาดจำ — ข้อสอบให้ tree มาแล้วให้ "แสดงขั้นตอนทำให้ balance")</h3>
+<div class="grid2">
+<div class="card"><h4>LL → หมุนขวา (Right Rotation)</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 320 150">
+  <line x1="80" y1="40" x2="50" y2="100" class="svg-edge"/><line x1="80" y1="40" x2="110" y2="100" class="svg-edge"/>
+  <rect x="50" y="15" width="60" height="40" rx="9" class="svg-n4"/><text x="80" y="35" class="svg-t">30</text>
+  <rect x="20" y="90" width="60" height="40" rx="9" class="svg-n4"/><text x="50" y="110" class="svg-t">20</text>
+  <rect x="80" y="90" width="60" height="40" rx="9" class="svg-n"/><text x="110" y="110" class="svg-t">10</text>
+  <text x="160" y="75" class="svg-t2" style="text-anchor:start;">BF(30) = +2 → หมุนขวาที่ 30<br><br>ผล: 20 ขึ้นเป็นพ่อ<br>30 กลายเป็นลูกขวาของ 20</text>
+</svg></div><p style="font-size:14px;">insert ไปทาง<em>ซ้ายของซ้าย</em> · ผลลัพธ์: <strong>10 ← 20 → 30</strong></p></div>
+<div class="card"><h4>RR → หมุนซ้าย (Left Rotation)</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 320 150">
+  <line x1="80" y1="40" x2="50" y2="100" class="svg-edge"/><line x1="80" y1="40" x2="110" y2="100" class="svg-edge"/>
+  <rect x="50" y="15" width="60" height="40" rx="9" class="svg-n4"/><text x="80" y="35" class="svg-t">10</text>
+  <rect x="20" y="90" width="60" height="40" rx="9" class="svg-n"/><text x="50" y="110" class="svg-t">20</text>
+  <rect x="80" y="90" width="60" height="40" rx="9" class="svg-n4"/><text x="110" y="110" class="svg-t">30</text>
+  <text x="160" y="75" class="svg-t2" style="text-anchor:start;">BF(10) = −2 → หมุนซ้ายที่ 10<br><br>ผล: 20 ขึ้นเป็นพ่อ<br>10 กลายเป็นลูกซ้ายของ 20</text>
+</svg></div><p style="font-size:14px;">insert ไปทาง<em>ขวาของขวา</em> · ตัวอย่างสไลด์: insert 10,20,30 → หมุนซ้ายครั้งเดียวจบ</p></div>
+<div class="card"><h4>LR → หมุนซ้าย(ลูก) แล้วขวา(พ่อ)</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 320 150">
+  <line x1="80" y1="40" x2="50" y2="100" class="svg-edge"/><line x1="50" y1="100" x2="20" y2="140" class="svg-edge" style="stroke-dasharray:4 4;"/>
+  <rect x="50" y="15" width="60" height="40" rx="9" class="svg-n4"/><text x="80" y="35" class="svg-t">30</text>
+  <rect x="20" y="90" width="60" height="40" rx="9" class="svg-n4"/><text x="50" y="110" class="svg-t">10</text>
+  <text x="80" y="132" class="svg-t2">20 แทรกคั่นกลาง</text>
+  <text x="170" y="60" class="svg-t2" style="text-anchor:start;">ขั้น 1: หมุนซ้ายที่ 10<br>ขั้น 2: หมุนขวาที่ 30<br>ผล: 20 ขึ้นกลาง</text>
+</svg></div><p style="font-size:14px;">insert ไป<em>ขวาของซ้าย</em> — ตัวกลาง (20) กลายเป็นราก</p></div>
+<div class="card"><h4>RL → หมุนขวา(ลูก) แล้วซ้าย(พ่อ)</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 320 150">
+  <line x1="80" y1="40" x2="110" y2="100" class="svg-edge"/><line x1="110" y1="100" x2="140" y2="140" class="svg-edge" style="stroke-dasharray:4 4;"/>
+  <rect x="50" y="15" width="60" height="40" rx="9" class="svg-n4"/><text x="80" y="35" class="svg-t">10</text>
+  <rect x="80" y="90" width="60" height="40" rx="9" class="svg-n4"/><text x="110" y="110" class="svg-t">30</text>
+  <text x="45" y="132" class="svg-t2">20 แทรกคั่นกลาง</text>
+  <text x="170" y="60" class="svg-t2" style="text-anchor:start;">ขั้น 1: หมุนขวาที่ 30<br>ขั้น 2: หมุนซ้ายที่ 10<br>ผล: 20 ขึ้นกลาง</text>
+</svg></div><p style="font-size:14px;">insert ไป<em>ซ้ายของขวา</em></p></div>
+</div>
+<div class="box exam"><span class="bt">สูตรตอบข้อ AVL ในข้อสอบ (ทำตามลำดับ ได้คะแนนเต็ม)</span>
+① insert ทีละตัวแบบ BST ปกติ → ② จาก node ที่เพิ่งใส่ <strong>ไต่ขึ้นหา "node แรกที่ BF = ±2"</strong> → ③ ดูทางเดินจาก node นั้นไปยังตัวใหม่: <strong>ซ้าย-ซ้าย = หมุนขวา / ขวา-ขวา = หมุนซ้าย / ซ้าย-ขวา = LR / ขวา-ซ้าย = RL</strong> → ④ วาด tree ใหม่ แล้วเขียน BF ทุก node ให้ดูว่า balance แล้ว → ทำซ้ำทุกครั้งที่ insert</div>
+<h4>ตัวอย่างไล่จริง: insert <code>10, 20, 30, 40, 50, 25</code></h4>
+<div class="steps">
+  <div class="step"><h4>10, 20, 30</h4>พอใส่ 30 → BF(10) = −2 (RR) → <strong>หมุนซ้ายที่ 10</strong> → ได้ 20 เป็นราก (ลูก: 10, 30)</div>
+  <div class="step"><h4>40</h4>เข้าขวาของ 30 · BF(20) = −1, BF(30) = −1 → ยัง balance ไม่ต้องทำอะไร</div>
+  <div class="step"><h4>50</h4>เข้าขวาของ 40 → BF(20) = −2, เส้นทาง ขวา-ขวา (RR) → <strong>หมุนซ้ายที่ 20</strong> → 30 ขึ้นเป็นราก (ลูกซ้าย 20, ขวา 40; 40 ลูกขวา 50)</div>
+  <div class="step"><h4>25</h4>เดิน: &lt;30 ซ้าย, &gt;20 ขวา → ลูกขวาของ 20 → BF(30) = +2 เพราะซ้าย (20) สูง 2 ขวา (40) สูง 1 → เส้นทาง <strong>ซ้าย-ขวา (LR)</strong> → หมุนซ้ายที่ 20 แล้วหมุนขวาที่ 30 → <strong>25 ขึ้นเป็นราก</strong> (ลูกซ้าย 20, ขวา 30, 30 ลูกขวา 40, 40 ลูกขวา 50) ✓</div>
+</div>
+<h4>ลบใน AVL</h4><p>ทำเหมือน BST delete แต่หลังลบต้องไต่ขึ้นเช็ก BF <strong>ทุกบรรพบุรุษ</strong> (rotate ได้หลายรอบ — insert หมุนได้สูงสุด 1 ครั้ง แต่ delete หมุนได้ O(log n) ครั้ง) · เงื่อนไขหมุนหลังลบดูเคสลูกของลูกด้วย: <code>bf&gt;1 &amp;&amp; bf(ลูกซ้าย)≥0 → หมุนขวา</code>, <code>bf&gt;1 &amp;&amp; bf(ลูกซ้าย)&lt;0 → LR</code>, และกลับกันฝั่งขวา</p>
+
+<h2 id="splay">7 · Splay Tree — ตัวที่เพิ่งถูกใช้ "ปีนขึ้นราก"</h2>
+<div class="box tip"><span class="bt">แนวคิด</span>ทุกครั้งที่ search/insert (และก่อน delete) จะ <strong>splay</strong> = หมุนตัวที่ถูกเข้าถึงขึ้นไปเป็นราก · ไอเดียเหมือน<em>แอปที่จำว่าคุณเปิดอะไรบ่อย</em> — ของที่ใช้ล่าสุดอยู่บนสุด เปิดซ้ำเร็วมาก · ไม่มีการเก็บ height (ไม่มี book-keeping) · เกณฑ์เวลาแบบ <strong>amortized O(log n)</strong> (เฉลี่ยต่อการทำงานหลาย ๆ ครั้ง)</div>
+<h3>3 เคสการ splay (ออก "Delete Splay Tree")</h3>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>เคส</th><th>ตำแหน่ง x สัมพัทธ์กับพ่อ/ปู่</th><th>หมุนอะไรก่อน</th></tr>
+  <tr><td><strong>Zig / Zag</strong></td><td>x อยู่ชั้นเดียวใต้ราก</td><td>หมุน <strong>พ่อ</strong> ครั้งเดียว จบ</td></tr>
+  <tr><td><strong>Zig-Zig / Zag-Zag</strong></td><td>อยู่ทางเดียวกันทั้งสองชั้น (ซ้าย-ซ้าย หรือ ขวา-ขวา)</td><td>หมุน <strong>ปู่ก่อน</strong> แล้วหมุนพ่อ ⭐ (สลับลำดับไม่ได้!)</td></tr>
+  <tr><td><strong>Zig-Zag / Zag-Zig</strong></td><td>อยู่ก้นหอก (ซ้าย-ขวา หรือ ขวา-ซ้าย)</td><td>หมุน <strong>พ่อก่อน</strong> แล้วหมุนปู่</td></tr>
+</table></div>
+<h3>ตัวอย่าง delete ตามสไลด์ (Delete 8)</h3>
+<div class="steps">
+  <div class="step"><h4>Search 8 แล้ว splay ขึ้นราก</h4>ตอนนี้ 8 อยู่บนสุด ลูกซ้าย = ค่าที่เล็กกว่าทั้งหมด, ลูกขวา = ใหญ่กว่าทั้งหมด</div>
+  <div class="step"><h4>Splay <strong>max ของซับต้นซ้าย</strong> ขึ้นเป็น "รากของฝั่งซ้าย"</h4>ตัวสูงสุดฝั่งซ้าย (ใหญ่สุดที่ยังน้อยกว่า 8) จะไม่มีลูกขวาแน่ ๆ</div>
+  <div class="step"><h4>ต่อฝั่งขวาของ 8 เข้ากับลูกขวาของรากใหม่</h4>แล้วทิ้ง 8 ไป — ลบเสร็จ ต้นไม้ยังเป็น BST ถูกต้อง</div>
+</div>
+
+<h2 id="graph">8 · Graph — Kruskal (MST) และ Dijkstra (Shortest Path)</h2>
+<h3>8.1 Kruskal — "เลือกเส้นถูกที่สุดทีละเส้น ถ้าไม่ทำวงจร" ⭐</h3>
+<div class="box tip"><span class="bt">เปรียบเทียบ</span>เหมือน<em>วางสายไฟเชื่อมหมู่บ้าน 6 หมู่ด้วยสายถูกสุด</em>: เรียงสายจากถูกไปแพง แล้วหยิบมาใช้ทีละเส้น — เส้นไหนทำให้เกิดวงจร (เชื่อมหมู่บ้านที่ต่อถึงกันอยู่แล้ว) ให้ทิ้ง · เครื่องมือตรวจวงจร = <strong>Union-Find</strong> (find ว่าสองจุดอยู่ "กลุ่ม" เดียวกันไหม, union = รวมกลุ่ม)</div>
+<div class="box exam"><span class="bt">โจทย์แนวเดียวกับสไลด์: A–G กับน้ำหนัก</span>
+A-B:7 · B-C:8 · A-D:5 · B-D:9 · B-E:7 · C-E:5 · D-E:15 · D-F:6 · E-F:8 · F-G:11 · E-G:9
+<div class="steps">
+  <div class="step"><h4>เรียงเส้นจากน้อยไปมาก</h4>A-D:5 · C-E:5 · D-F:6 · A-B:7 · B-E:7 · E-F:8 · B-C:8 · E-G:9 · B-D:9 · F-G:11 · D-E:15</div>
+  <div class="step"><h4>A-D(5) ✓ · C-E(5) ✓ · D-F(6) ✓</h4>กลุ่มเกิดใหม่: {A,D,F}, {C,E}, {B}, {G}</div>
+  <div class="step"><h4>A-B(7) ✓</h4>B รวมเข้ากลุ่ม {A,D,F,B} · <strong>B-E(7) ✓</strong> รวมสองกลุ่ม → {A,B,C,D,E,F}</div>
+  <div class="step"><h4>E-F(8) ✗ · B-C(8) ✗</h4>ทั้งคู่ "ปลายทั้งสองอยู่กลุ่มเดียวกันแล้ว" → ทิ้ง (จะเกิด cycle)</div>
+  <div class="step"><h4>E-G(9) ✓</h4>จำนวนเส้น = 6 = n−1 (7 จุด) → <strong>จบ</strong> (เส้นที่เหลือไม่ต้องดู)</div>
+</div>
+<strong>MST = A-D(5) + C-E(5) + D-F(6) + A-B(7) + B-E(7) + E-G(9) · รวม = 39</strong><br>
+เขียนตอบ: ตารางเรียงน้ำหนัก + ทำเครื่องหมาย ✓/✗ พร้อมเหตุผล (same component → cycle) + วาด MST ที่ได้ + รวมน้ำหนัก</div>
+<h4>Union-Find ที่ยกมาใช้ (โค้ดย่อ)</h4>
+<pre><code>int find(int x) {                 <span class="cm">// หา "หัวโจก" ของกลุ่ม</span>
+  while (parent[x] != x) x = parent[x];
+  return x;
+}
+void union(int a, int b) {
+  int ra = find(a), rb = find(b);
+  if (ra != rb) parent[rb] = ra;  <span class="cm">// รวมกลุ่ม (เวอร์ชัน + path compression &amp; union by rank เร็วกว่า)</span>
+}</code></pre>
+<h3>8.2 Dijkstra — ระยะสั้นสุดจากจุดต้น ⭐ (ออก "แสดงขั้นตอน + ผลลัพธ์")</h3>
+<div class="box tip"><span class="bt">เปรียบเทียบ</span>เหมือน<em>แผนที่ GPS</em>: ทำเครื่องหมายจุดที่ "แน่ใจระยะสั้นสุดแล้ว" ทีละจุด (จุดที่ใกล้สุดเสมอ) แล้วใช้จุดนั้น "ปรับปรุง (relax)" ระยะของเพื่อนบ้าน: ถ้า <strong>ผ่านฉันไปสั้นกว่าที่จำไว้ → แก้ระยะ + จดว่ามาจากฉัน</strong></div>
+<div class="fig">
+<p style="margin:2px 0 6px;font-weight:700;">โจทย์ตัวอย่าง (แนวเดียวกับข้อสอบ):</p>
+<div class="fig" style="box-shadow:none;border:none;margin:0;padding:0;"><svg viewBox="0 0 760 320">
+  <g font-size="13">
+    <line x1="100" y1="90" x2="340" y2="90" class="svg-edge"/><text x="215" y="78" class="svg-t2">4</text>
+    <line x1="100" y1="105" x2="100" y2="225" class="svg-edge"/><text x="72" y="170" class="svg-t2">2</text>
+    <line x1="132" y1="105" x2="108" y2="222" class="svg-edge"/><text x="150" y="170" class="svg-t2">1</text>
+    <line x1="368" y1="100" x2="608" y2="100" class="svg-edge"/><text x="488" y="88" class="svg-t2">5</text>
+    <line x1="352" y1="112" x2="618" y2="228" class="svg-edge"/><text x="470" y="160" class="svg-t2">8</text>
+    <line x1="132" y1="255" x2="608" y2="255" class="svg-edge"/><text x="370" y="243" class="svg-t2">2</text>
+    <line x1="108" y1="255" x2="332" y2="112" class="svg-edge"/><text x="215" y="205" class="svg-t2">10</text>
+    <line x1="640" y1="112" x2="640" y2="228" class="svg-edge"/><text x="668" y="175" class="svg-t2">6</text>
+    <line x1="612" y1="248" x2="352" y2="112" class="svg-edge"/><text x="490" y="200" class="svg-t2">3</text>
+    <rect x="70" y="55" width="60" height="50" rx="12" class="svg-n3"/><text x="100" y="80" class="svg-t">A</text>
+    <rect x="310" y="55" width="60" height="50" rx="12" class="svg-n"/><text x="340" y="80" class="svg-t">B</text>
+    <rect x="70" y="230" width="60" height="50" rx="12" class="svg-n"/><text x="100" y="255" class="svg-t">C</text>
+    <rect x="580" y="55" width="60" height="50" rx="12" class="svg-n"/><text x="610" y="80" class="svg-t">D</text>
+    <rect x="580" y="230" width="60" height="50" rx="12" class="svg-n"/><text x="610" y="255" class="svg-t">E</text>
+  </g>
+  <text x="380" y="310" class="svg-t2">A-B:4 · A-C:2 · B-C:1 · B-D:5 · C-D:8 · C-E:10 · D-E:2</text>
+</svg></div>
+<figcaption>รูป 5 — กราฟตัวอย่าง 5 จุด (A–E) หาระยะสั้นสุดจาก A</figcaption>
+</div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ผลัด (pop ตัวเล็กสุด)</th><th>relax อะไรบ้าง</th><th>B</th><th>C</th><th>D</th><th>E</th></tr>
+  <tr><td>เริ่ม</td><td>dist[A]=0</td><td class="num">∞</td><td class="num">∞</td><td class="num">∞</td><td class="num">∞</td></tr>
+  <tr><td><strong>A (0)</strong></td><td>B: 0+4=4 ✓ · C: 0+2=2 ✓</td><td class="num hl">4 <small>(←A)</small></td><td class="num hl">2 <small>(←A)</small></td><td class="num">∞</td><td class="num">∞</td></tr>
+  <tr><td><strong>C (2)</strong></td><td>B: 2+1=3 &lt; 4 ✓ · D: 2+8=10 ✓ · E: 2+10=12 ✓</td><td class="num">3 <small>(←C)</small></td><td class="num">2 ✓จบ</td><td class="num hl">10 <small>(←C)</small></td><td class="num hl">12 <small>(←C)</small></td></tr>
+  <tr><td><strong>B (3)</strong></td><td>D: 3+5=8 &lt; 10 ✓ (ผ่าน B สั้นกว่า!)</td><td class="num">3 ✓จบ</td><td></td><td class="num">8 <small>(←B)</small></td><td class="num">12</td></tr>
+  <tr><td><strong>D (8)</strong></td><td>E: 8+2=10 &lt; 12 ✓</td><td></td><td></td><td class="num">8 ✓จบ</td><td class="num">10 <small>(←D)</small></td></tr>
+  <tr><td><strong>E (10)</strong></td><td>ไม่มีเพื่อนบ้านที่ปรับได้ → จบ</td><td></td><td></td><td></td><td class="num">10 ✓จบ</td></tr>
+</table></div>
+<div class="box ok"><span class="bt">ผลลัพธ์ + วิธีเขียนตอบ</span>dist: A=0, C=2, B=3, D=8, E=10 · path ไป E ย้อนจาก prev: E←D←B←C←A → <strong>A→C→B→D→E</strong> รวม 2+1+5+2 = 10 (ตรวจสอบได้!)<br>
+ในข้อสอบให้: (1) ตารางเดินทีละผลัดแบบนี้ (2) วาด shortest-path tree หรือเขียน path + ระยะรวม (3) จุดที่ dist ยัง ∞ = เข้าไม่ถึง</div>
+<div class="box warn"><span class="bt">เปรียบเทียบ Prim vs Dijkstra vs Kruskal (ชอบออกถามความต่าง)</span>
+สามตัวเป็น <strong>greedy ทั้งหมด</strong> · <strong>Prim</strong>: ปลูกต้นไม้จากจุดเริ่ม เลือกเส้น "ถูกสุดที่เชื่อมต้นไม้กับข้างนอก" (key[v] = น้ำหนักเส้น) ได้ MST · <strong>Dijkstra</strong>: เลือกจุดที่ "ระยะสะสมสั้นสุด" (dist[v] = ระยะรวมจากต้นทาง) ได้เส้นทางสั้นสุด — <strong>ใช้ 2 ตัวนี้สลับกันไม่ได้!</strong> MST ไม่จำเป็นต้องให้เส้นทางสั้นสุด · <strong>Kruskal</strong>: เรียงเส้นแล้วเลือกด้วย Union-Find (ไม่ต้องมีจุดเริ่ม)</div>
+
+<h2 id="binstr">9 · เขียนโปรแกรม: Binary String ยาว K โดย 1 ห้ามติดกัน</h2>
+<div class="box tip"><span class="bt">แนวคิด (recursion)</span>สร้างสายอักขระทีละตำแหน่ง: ตำแหน่งใหม่วาง <strong>"0" ได้เสมอ</strong> · วาง <strong>"1" ได้เฉพาะเมื่อตัวก่อนหน้าไม่ใช่ 1</strong> — เหมือน<em>นั่งเรียงที่นั่งโรงหนังให้คน 1 คนมีที่ว่างข้าง ๆ เสมอ</em> · พอครบ K ตัว พิมพ์คำตอบ</div>
+<pre><code>static void gen(int remain, String s, char last) {
+    if (remain == 0) {                 <span class="cm">// สร้างครบ K ตัวแล้ว</span>
+        System.out.println(s);
+        return;
+    }
+    gen(remain - 1, s + "0", '0');     <span class="cm">// วาง 0 ได้เสมอ</span>
+    if (last != '1') {                 <span class="cm">// 1 ห้ามติดกับ 1</span>
+        gen(remain - 1, s + "1", '1');
+    }
+}
+<span class="cm">// เรียกใช้: gen(K, "", '0');</span></code></pre>
+<h4>ไล่มือ K = 3 (มี 5 คำตอบ)</h4>
+<div class="fig"><svg viewBox="0 0 700 330" role="img" aria-label="binary string recursion tree">
+  <g><line x1="350" y1="55" x2="200" y2="125" class="svg-edge"/><line x1="350" y1="55" x2="500" y2="125" class="svg-edge"/>
+  <line x1="200" y1="125" x2="120" y2="195" class="svg-edge"/><line x1="200" y1="125" x2="280" y2="195" class="svg-edge"/>
+  <line x1="500" y1="125" x2="420" y2="195" class="svg-edge"/><line x1="500" y1="125" x2="580" y2="195" class="svg-edge"/>
+  <line x1="120" y1="195" x2="80" y2="265" class="svg-edge"/><line x1="120" y1="195" x2="160" y2="265" class="svg-edge"/>
+  <line x1="280" y1="195" x2="240" y2="265" class="svg-edge"/><line x1="280" y1="195" x2="320" y2="265" class="svg-edge" style="stroke-dasharray:5 5;"/>
+  <line x1="420" y1="195" x2="400" y2="265" class="svg-edge"/><line x1="420" y1="195" x2="480" y2="265" class="svg-edge"/>
+  <line x1="580" y1="195" x2="560" y2="265" class="svg-edge" style="stroke-dasharray:5 5;"/><line x1="580" y1="195" x2="620" y2="265" class="svg-edge"/></g>
+  <rect x="315" y="30" width="70" height="44" rx="9" class="svg-n"/><text x="350" y="52" class="svg-t">เริ่ม</text>
+  <rect x="165" y="100" width="70" height="44" rx="9" class="svg-n2"/><text x="200" y="122" class="svg-t">0</text>
+  <rect x="465" y="100" width="70" height="44" rx="9" class="svg-n2"/><text x="500" y="122" class="svg-t">1</text>
+  <rect x="85" y="170" width="70" height="44" rx="9" class="svg-n2"/><text x="120" y="192" class="svg-t">00</text>
+  <rect x="245" y="170" width="70" height="44" rx="9" class="svg-n2"/><text x="280" y="192" class="svg-t">01</text>
+  <rect x="385" y="170" width="70" height="44" rx="9" class="svg-n2"/><text x="420" y="192" class="svg-t">10</text>
+  <rect x="545" y="170" width="70" height="44" rx="9" class="svg-n4"/><text x="580" y="192" class="svg-t">11 ✗</text>
+  <rect x="45" y="240" width="70" height="44" rx="9" class="svg-n3"/><text x="80" y="262" class="svg-t">000</text>
+  <rect x="125" y="240" width="70" height="44" rx="9" class="svg-n3"/><text x="160" y="262" class="svg-t">001</text>
+  <rect x="205" y="240" width="70" height="44" rx="9" class="svg-n3"/><text x="240" y="262" class="svg-t">010</text>
+  <rect x="285" y="240" width="70" height="44" rx="9" class="svg-n4"/><text x="320" y="262" class="svg-t">011 ✗</text>
+  <rect x="365" y="240" width="70" height="44" rx="9" class="svg-n3"/><text x="400" y="262" class="svg-t">100</text>
+  <rect x="445" y="240" width="70" height="44" rx="9" class="svg-n3"/><text x="480" y="262" class="svg-t">101</text>
+  <rect x="525" y="240" width="70" height="44" rx="9" class="svg-n4"/><text x="560" y="262" class="svg-t">110 ✗</text>
+  <rect x="585" y="240" width="70" height="44" rx="9" class="svg-n4"/><text x="620" y="262" class="svg-t">111 ✗</text>
+  <text x="350" y="318" class="svg-t2">คำตอบทั้งหมด: 000, 001, 010, 100, 101 (5 คำ = Fibonacci รูปแบบหนึ่ง!)</text>
+</svg><figcaption>รูป 6 — ต้นไม้ recursion: กิ่ง "1 ติดกัน" ถูกตัดทิ้งตั้งแต่ก่อนลงลึก (pruning)</figcaption></div>
+
+<h2 id="checklist">✅ เช็กลิสต์ + แผ่น short note (1 แผ่น A4) ควรมีอะไร</h2>
+<div class="grid2">
+<div class="card"><h4>ต้องทำได้มือเปล่า</h4><ul>
+<li>☐ Bubble / Insertion / Selection / Quick ไล่ pass พร้อมเขียน state ของ array ทุกรอบ</li>
+<li>☐ Heap: insert (ลอยขึ้น) + removeMin (จมลง เลือกลูกที่น้อยกว่า) วาด tree ใหม่ทุกสเต็ป</li>
+<li>☐ BST: สร้างจากลำดับ + searchIter + delete 3 เคส</li>
+<li>☐ AVL: นับ BF + หมุน 4 แบบ (LL/RR เดียว, LR/RL สองรอบ)</li>
+<li>☐ Splay: zig / zig-zig (ปู่ก่อน!) / zig-zag (พ่อก่อน) + delete</li>
+<li>☐ Kruskal: เรียงเส้น + เช็ก cycle ด้วยกลุ่ม + รวมน้ำหนัก</li>
+<li>☐ Dijkstra: ตาราง dist ทีละผลัด + ย้อน path จาก prev</li>
+<li>☐ Binary String K ตัว (1 ห้ามติดกัน)</li>
+</ul></div>
+<div class="card"><h4>ใส่ลง short note 1 แผ่น</h4><ul>
+<li>ตาราง Big-O ทุก sort (best/worst/stable)</li>
+<li>สูตร array↔heap: left=2i+1, right=2i+2, parent=(i−1)/2</li>
+<li>แผนภาพ 4 การหมุน AVL (วาด mini)</li>
+<li>ลำดับหมุน Splay: zig-zig = ปู่ก่อน</li>
+<li>สเต็ป Kruskal/Dijkstra เป็น bullet 5 ข้อ</li>
+<li>โค้ด searchIter + gen binary string (เขียนสั้น)</li>
+</ul></div>
+</div>
+
+<p class="footnote">อ้างอิง: สไลด์ L08 Sorting · L09 Priority Queue · L10 BST · L11 Advanced Tree · L12 Graph (สจล. CS) + รีวิวข้อสอบจากรุ่นพี่ 2 ปีล่าสุด</p>
+</main>
+</div>
+
+<button id="toTop" title="กลับขึ้นด้านบน" aria-label="กลับขึ้นด้านบน">↑</button>
+<script src="assets/main.js"></script>
+</body>
+</html>

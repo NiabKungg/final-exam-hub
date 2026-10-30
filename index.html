@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Exam Hub — เว็บติวสอบ Final ปี 2 เทอม 1 (OS · DSA · DB · SE)</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-size='15' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3E%A1F%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<header class="site">
+  <div class="site-inner">
+    <a class="brand" href="index.html"><span class="logo">FE</span>Final Exam Hub</a>
+    <nav class="main">
+      <a href="index.html" class="active">หน้าแรก</a>
+      <a href="os.html">OS</a>
+      <a href="dsa.html">DSA</a>
+      <a href="db.html">Database</a>
+      <a href="se.html">SE</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" data-action="toggle-theme" title="สลับธีมมืด/สว่าง" aria-label="สลับธีม">🌙</button>
+      <button class="icon-btn" id="menuBtn" title="เมนู" aria-label="เมนู">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap" style="display:block;">
+<main>
+<section class="hero">
+  <div class="kicker">ปี 2 เทอม 1 · Final Examination · ครบทั้ง 4 วิชา</div>
+  <h1>เว็บติวสอบ Final — สรุปทุกวิชา อ่านจบในเว็บเดียว 🎯</h1>
+  <p class="lead">รวมเนื้อหา <strong>ระบบปฏิบัติการ (OS)</strong> · <strong>โครงสร้างข้อมูลและอัลกอริทึม (DSA)</strong> ·
+  <strong>ระบบฐานข้อมูล (DB)</strong> · <strong>วิศวกรรมซอฟต์แวร์ (SE)</strong> สอนละเอียดตั้งแต่พื้นฐาน มีภาพอธิบายทีละขั้นตอน
+  เปรียบเทียบกับของจริงในชีวิตประจำวัน และจัดเนื้อหาตาม <strong>แนวข้อสอบจากรุ่นพี่</strong> โดยตรง — อ่านได้ทั้งคอมและมือถือ</p>
+  <div class="meta">
+    <span class="chip">📖 อธิบายละเอียด + พื้นฐานแทรก</span>
+    <span class="chip">🖼️ ภาพประกอบ + step-by-step ทุกเรื่องยาก</span>
+    <span class="chip">📝 จัดตามแนวข้อสอบรุ่นพี่</span>
+    <span class="chip">📱 Responsive คอม/มือถือ</span>
+  </div>
+</section>
+
+<h2 id="subjects">📚 เลือกวิชาที่จะติว</h2>
+<div class="grid2">
+  <a class="card subject-card" href="os.html">
+    <span class="em">🖥️</span> <h3 style="margin:6px 0 4px;">Operating Systems <span class="pill">สอบคำนวณหนัก</span></h3>
+    <p style="margin:4px 0;color:var(--ink-soft);font-size:15px;">สอบถูก/ผิด (ตอบผิด −1!) + เติมคำ + โจทย์คำนวณเยอะกว่า Midterm<br>เน้น Final: Paging, Page Replacement, CPU Scheduling, ไล่ fork(), Semaphore, Deadlock, Banker's, File System</p>
+    <ul>
+      <li>ไล่โค้ด fork() ทีละบรรทัด พร้อม process tree</li>
+      <li>ตาราง Gantt ทุกอัลกอริทึม scheduling</li>
+      <li>คำนวณ Paging แบบที่ "คนส่วนมากไม่ทัน" ให้ทันขึ้น</li>
+    </ul>
+  </a>
+  <a class="card subject-card" href="dsa.html">
+    <span class="em">🌳</span> <h3 style="margin:6px 0 4px;">Data Structures &amp; Algorithms <span class="pill">วาด tree ครึ่งข้อสอบ</span></h3>
+    <p style="margin:4px 0;color:var(--ink-soft);font-size:15px;">Short note 1 แผ่น · ออกทฤษฎีเกือบหมด + แลป 1 ข้อ<br>เน้น Final: Sorting ทีละสเต็ป, Heap/PQ, BST, AVL, Splay, MST (Kruskal), Dijkstra, โปรแกรม Binary String</p>
+    <ul>
+      <li>ไล่ sort ทีละ pass พร้อมภาพกล่องตัวเลข</li>
+      <li>วาด AVL rotation / Splay ทีละขั้น</li>
+      <li>โค้ด searchIter / Binary String พร้อมเฉลย</li>
+    </ul>
+  </a>
+  <a class="card subject-card" href="db.html">
+    <span class="em">🗄️</span> <h3 style="margin:6px 0 4px;">Database Systems <span class="pill">แนวข้อสอบชัด 120 คะแนน</span></h3>
+    <p style="margin:4px 0;color:var(--ink-soft);font-size:15px;">เขียนตอบ · อาจารย์บอกแนวตรงๆ: วิพากษ์ Data Model, Normalization 1NF–5NF+BCNF, Transaction (Recovery+Concurrency), DB Concept, Data Warehouse, SQL (Outer JOIN, Subquery)</p>
+    <ul>
+      <li>สูตรตอบ Normalization ทีละ NF พร้อมตัวอย่างเต็ม</li>
+      <li>Log-based Recovery + Concurrency Control แบบละเอียด</li>
+      <li>Outer JOIN / Correlated Subquery พร้อมตารางผลลัพธ์</li>
+    </ul>
+  </a>
+  <a class="card subject-card" href="se.html">
+    <span class="em">🧩</span> <h3 style="margin:6px 0 4px;">Software Engineering <span class="pill">จับคู่ + เขียนตอบ</span></h3>
+    <p style="margin:4px 0;color:var(--ink-soft);font-size:15px;">จับคู่ Testing / Maintenance + เขียนตอบ: FR &amp; NFR, Use Case Diagram, Schema, Maintenance Plan, สถาปัตยกรรมซอฟต์แวร์ (เคส CS-Hospital / CS-Pizza)</p>
+    <ul>
+      <li>ตารางจับคู่ Testing 7 ประเภท + Maintenance 4 แบบ</li>
+      <li>ตัวอย่างคำตอบเต็มจากเคส CS-Hospital</li>
+      <li>วาด Use Case Diagram ด้วย SVG + สูตรเขียน Schema</li>
+    </ul>
+  </a>
+</div>
+
+<h2 id="formats">📋 รูปแบบข้อสอบแต่ละวิชา (จากรีวิวรุ่นพี่)</h2>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>วิชา</th><th>รูปแบบ</th><th>ข้อควรรู้จากรุ่นพี่</th></tr>
+  <tr>
+    <td><strong>OS</strong></td>
+    <td>ถูก/ผิด 2 ตัวเลือก (<span class="pill red">ตอบผิด −1</span> ถูก +2 ไม่ตอบ 0) + เติมตัวเลข/คำสั้น ๆ</td>
+    <td>ข้อสอบเยอะกว่า Midterm เน้นความเร็ว 3 ชม.แทบไม่พอ · Open Book แต่เสียเวลาถ้าเปิดทุกข้อ ควรจดสรุปสั้น ๆ · <strong>โจทย์คำนวณ Paging คนส่วนมากไม่ทัน</strong> · ไล่ fork() มีจุดหลอกเยอะ · โค้ดทุกข้อ compile ผ่าน ไม่ต้องตอบ "Error"</td>
+  </tr>
+  <tr>
+    <td><strong>DSA</strong></td>
+    <td>เขียนตอบ แสดงขั้นตอน + ผลลัพธ์สุดท้าย · เติมคำ 15 ข้อ (Sort/Search/Big-O) · แลป 1 ข้อ</td>
+    <td>Short note ได้ 1 แผ่น · ครึ่งหนึ่งของข้อสอบคือ "วาด tree" (BST, AVL, Heap, Splay) · ให้ชุดตัวเลขมาไล่ sort/สร้าง tree · อาจมีเขียนโปรแกรมสั้น ๆ เช่น Binary String</td>
+  </tr>
+  <tr>
+    <td><strong>DB</strong></td>
+    <td>เขียนตอบ รวม 120 คะแนน 6 ตอน (อาจารย์ประกาศแนวชัด ๆ)</td>
+    <td>วิพากษ์ Data Model 10 · Normalization 40 (1–3NF, BCNF, 4NF, 5NF) · Transaction 30 (Recovery + Concurrency) · DB Concept 10 · Data Warehouse 15 (ไม่ออกออกแบบ) · SQL 15 (Outer JOIN, Subquery, Correlated Subquery)</td>
+  </tr>
+  <tr>
+    <td><strong>SE</strong></td>
+    <td>แบบจับคู่ + เขียนตอบ</td>
+    <td>จับคู่ Testing และ Maintenance · เขียนแผนทดสอบ/บำรุงรักษาจากโปรเจกต์ตัวเอง · FR &amp; NFR (CS-Hospital / CS-Pizza) · Use Case Diagram · Schema · สถาปัตยกรรมซอฟต์แวร์</td>
+  </tr>
+</table></div>
+
+<div class="box warn">
+  <span class="bt">⚠️ กลยุทธ์ข้อถูก/ผิดแบบหักคะแนน (OS)</span>
+  ถูก +2, ผิด −1, ไม่ตอบ 0 → ถ้า<em>ไม่รู้จริง ๆ</em>ให้ <strong>ข้าม</strong> (คาดหวัง 0 ดีกว่าเสี่ยง) แต่ถ้ากำจัดตัวเลือกผิดได้ 1 ข้อแล้วเหลือ 50/50 คุ้มที่จะเดา เพราะค่าคาดหวัง = ½(2) + ½(−1) = <strong>+0.5</strong> ยังเป็นบวก! ระวังเฉพาะข้อที่รู้ว่า "ไม่แน่ใจเลยสักนิด"
+</div>
+
+<h2 id="plan">🗓️ ลำดับการอ่านที่แนะนำ (ถ้าเวลาน้อย)</h2>
+<div class="steps">
+  <div class="step"><h4>อ่าน "แนวข้อสอบ" ของแต่ละวิชาก่อน (ใช้เวลา 10 นาที)</h4>ทุกหน้ามีกล่องสีม่วง "🎯 แนวข้อสอบจากรุ่นพี่" — รู้ก่อนว่าต้องเก่งเรื่องไหน แล้วค่อยลงรายละเอียด ไม่ต้องอ่านทุกคำตามลำดับ</div>
+  <div class="step"><h4>เก็บเรื่อง "คำนวณ" ให้ได้ก่อน (ได้คะแนนแน่นอนที่สุด)</h4>OS: Paging, Page Replacement, CPU Scheduling, EAT, Banker's · DSA: ทุกข้อวาด tree/sort · DB: SQL · เรื่องพวกนี้ฝึกมือ 2-3 ข้อก็จำลำดับได้หมด</div>
+  <div class="step"><h4>จำ "ตารางจับคู่" สำหรับ SE/OS ทฤษฎี</h4>Testing 7 แบบ, Maintenance 4 แบบ, ชนิด Signal, ประเภท OS, ชนิด File System — เป็นข้อง่ายที่ขาดไม่ได้</div>
+  <div class="step"><h4>เตรียม Short Note 1 แผ่น (DSA) และสรุปพับไว้ (OS open book)</h4>ใส่: สูตร EAT, ตาราง Big-O, ตัวอย่าง AVL rotation 4 แบบ, โครง Banker's, ตัวอย่าง log recovery — ห้ามเอา "ทั้งชีท" เข้าไปเพราะไม่มีเวลาเปิดหา</div>
+</div>
+
+<h2 id="ask">💬 ถามเนื้อหาเพิ่มจาก NotebookLM ของอาจารย์</h2>
+<div class="box tip">
+  <span class="bt">ห้องถาม-ตอบจากวิดีโอ/สไลด์ของอาจารย์</span>
+  ถ้าอยากถามเนื้อหาจากวิดีโอการสอนโดยตรง เปิด NotebookLM ที่ลิงก์นี้แล้วพิมพ์ถามได้เลย:
+  <br><a href="https://notebook.google.com/notebook/5db4f39c-dd66-4504-8cc6-ed33e889b56a" target="_blank" rel="noopener">notebook.google.com/notebook/5db4f39c-dd66-4504-8cc6-ed33e889b56a</a>
+  <br><small>(เนื้อหาในเว็บนี้ถูกจัดเรียงตามสไลด์/วิดีโอชุดเดียวกันอยู่แล้ว — ใช้เป็นแหล่งเช็กเพิ่มเติมได้)</small>
+</div>
+
+<h2 id="links">🔗 เว็บรีวิวย่อยที่เกี่ยวข้อง</h2>
+<div class="grid2">
+  <div class="card"><h4>DSA Final Review (มี visualizer)</h4>
+    <p style="font-size:14.5px;color:var(--ink-soft);">เว็บติว DSA ที่มี AVLT/Heap อินเทอร์แอกทีฟ — ใช้ฝึกวาด tree เสริมได้</p>
+    <a href="http://localhost:8791/" target="_blank" rel="noopener">localhost:8791 (ต้องรันเซิร์ฟเวอร์อยู่)</a></div>
+  <div class="card"><h4>ไฟล์ต้นทางทั้งหมด</h4>
+    <p style="font-size:14.5px;color:var(--ink-soft);">สไลด์ OS (OSNo00–10Present.pdf), สไลด์ DSA (L08–L12), สไลด์ SE (Ch2–Ch11), สไลด์ DB (เอกสาร data base) และไฟล์ "รีวิวข้อสอบ Final จากรุ่นพี่" ของทุกวิชา</p></div>
+</div>
+
+<p class="footnote">เว็บนี้จัดทำเพื่อเตรียมสอบ Final ภาค 1/2569 · อ้างอิง: สไลด์รายวิชา + รีวิวข้อสอบจากรุ่นพี่ + NotebookLM ประกอบการสอน · อ่านได้ทั้งคอมและมือถือ</p>
+</main>
+</div>
+
+<button id="toTop" title="กลับขึ้นด้านบน" aria-label="กลับขึ้นด้านบน">↑</button>
+<script src="assets/main.js"></script>
+</body>
+</html>

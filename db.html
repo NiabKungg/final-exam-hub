@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Database Final Prep — ติวสอบ Final ระบบฐานข้อมูล</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230e7490'/%3E%3Ctext x='16' y='22' font-size='13' font-weight='bold' text-anchor='middle' fill='white' font-family='sans-serif'%3EDB%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="progress"></div>
+<header class="site">
+  <div class="site-inner">
+    <a class="brand" href="index.html"><span class="logo">FE</span>Final Exam Hub</a>
+    <nav class="main">
+      <a href="index.html">หน้าแรก</a>
+      <a href="os.html">OS</a>
+      <a href="dsa.html">DSA</a>
+      <a href="db.html" class="active">Database</a>
+      <a href="se.html">SE</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-btn" data-action="toggle-theme" title="สลับธีม" aria-label="สลับธีม">🌙</button>
+      <button class="icon-btn" id="menuBtn" title="เมนู" aria-label="เมนู">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+<aside class="toc">
+  <div class="toc-head">สารบัญ DB ▾</div>
+  <div class="toc-body">
+    <a href="#exam">🎯 แนวข้อสอบ 120 คะแนน</a>
+    <a href="#critique">[1] วิพากษ์ Data Model (10)</a>
+    <a href="#normal">[2] Normalization 1NF–5NF+BCNF (40)</a>
+    <a href="#txn">[3] Transaction: Recovery + Concurrency (30)</a>
+    <a href="#concept">[4] DB Concept (10)</a>
+    <a href="#dw">[5] Data Warehouse (15)</a>
+    <a href="#sql">[6] SQL: JOIN + Subquery (15)</a>
+    <a href="#checklist">✅ เช็กลิสต์ก่อนเข้าห้อง</a>
+  </div>
+</aside>
+
+<main>
+<section class="hero">
+  <div class="kicker">Database Systems · Final Exam · เขียนตอบทั้งหมด</div>
+  <h1>ติวสอบ Final Database — อาจารย์ประกาศแนวข้อสอบตรง ๆ</h1>
+  <p class="lead">รวม 120 คะแนน 6 ตอน: วิพากษ์ Data Model · Normalization (คะแนนหนักสุด 40) · Transaction Processing ·
+  DB Concept · Data Warehouse · SQL — ทุกตอนมี "สูตรตอบ" และตัวอย่างเฉลยละเอียดพร้อมภาพ</p>
+  <div class="meta"><span class="chip">📝 เขียนตอบทั้งหมด</span><span class="chip">⭐ Normalization 40 + Transaction 30 = กินคะแนนครึ่งข้อสอบ</span><span class="chip">💡 เคล็ด: ทำ SQL ให้เสร็จก่อน เพราะกินเวลาสุด</span></div>
+</section>
+
+<h2 id="exam">🎯 แนวข้อสอบที่อาจารย์บอกเอง (จำลำดับนี้ได้ = วางแผนเวลาถูก)</h2>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ตอน</th><th>หัวข้อ</th><th>คะแนน</th><th>แผนเวลา (สมมติ 3 ชม.)</th></tr>
+  <tr><td>[1]</td><td>วิพากษ์ Data Model ที่อ้างอิงการออกแบบ 1 ข้อ</td><td class="num">10</td><td class="num">15 นาที</td></tr>
+  <tr><td>[2]</td><td><strong>Normalization: 4 ข้อ (1–3NF, BCNF, 4NF, 5NF)</strong></td><td class="num hl">40</td><td class="num">50 นาที</td></tr>
+  <tr><td>[3]</td><td><strong>Transaction Processing: 2 ข้อ (Recovery Control, Concurrency Control)</strong></td><td class="num hl">30</td><td class="num">40 นาที</td></tr>
+  <tr><td>[4]</td><td>DB Concept</td><td class="num">10</td><td class="num">15 นาที</td></tr>
+  <tr><td>[5]</td><td>ความรู้เบื้องต้น Data Warehouse <span class="pill">**ไม่ออกการออกแบบ**</span></td><td class="num">15</td><td class="num">20 นาที</td></tr>
+  <tr><td>[6]</td><td>SQL: Outer JOIN, Subquery, Correlated Subquery</td><td class="num">15</td><td class="num">40 นาที <span class="pill red">ทำก่อน!</span></td></tr>
+</table></div>
+<div class="box warn"><span class="bt">เคล็ดลับจากรุ่นพี่</span>"แนะนำว่าทำ <strong>SQL ให้เสร็จก่อน</strong> เพราะใช้เวลาเยอะมาก" — เปิดข้อสอบปรับสายตาดู SQL ก่อนเลย แล้วค่อยกลับมาทำเรียงตอน (หรือทำ SQL เป็นตอนแรกเลยก็ได้)</div>
+
+<h2 id="critique">[1] วิพากษ์แบบจำลองข้อมูล — Data Model Critique (10 คะแนน)</h2>
+<div class="box ok"><span class="bt">หลักคิด 2 ประโยค (ต้องพูดถึงในคำตอบ)</span>
+<strong>1) No Silver Bullet:</strong> ไม่มี data model ใดใช้ได้กับทุกงาน — การออกแบบต้องผูกกับบริบทธุรกิจจริง (Business Domain &amp; Process)<br>
+<strong>2) เครื่องหมาย ≠:</strong> โมเดลของระบบคนละประเภท<strong>นำมาแทนกันตรง ๆ ไม่ได้</strong> เพราะ "การไหลของข้อมูล" (Information Flow) และ "ข้อจำกัดทางธุรกิจ" ต่างกันสิ้นเชิง</div>
+<h3>1.1 รู้จักโมเดลทั้ง 3 รูปแบบ (เคสร้านอาหาร → อีคอมเมิร์ซ)</h3>
+<div class="fig"><svg viewBox="0 0 780 430" role="img" aria-label="3 data models">
+  <defs><marker id="cm" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="svg-arrowhead"/></marker></defs>
+  <rect x="10" y="10" width="370" height="180" rx="12" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="195" y="32" class="svg-t" style="fill:#dc2626;">① Bill-Centric (ร้านอาหาร/POS คิดเงินทันที)</text>
+  <g font-size="13">
+    <rect x="25" y="55" width="95" height="36" rx="8" class="svg-n"/><text x="72" y="73" class="svg-t">CUSTOMERS</text>
+    <rect x="155" y="55" width="85" height="36" rx="8" class="svg-n3"/><text x="197" y="73" class="svg-t">BILLS ⭐</text>
+    <rect x="275" y="55" width="95" height="36" rx="8" class="svg-n2"/><text x="322" y="73" class="svg-t">BILL_ITEMS</text>
+    <rect x="275" y="140" width="95" height="36" rx="8" class="svg-n2"/><text x="322" y="158" class="svg-t">MENU_ITEMS</text>
+    <rect x="155" y="140" width="85" height="36" rx="8" class="svg-n2"/><text x="197" y="158" class="svg-t">PAYMENTS</text>
+    <line x1="120" y1="73" x2="151" y2="73" class="svg-edge"/><text x="135" y="63" class="svg-t2">1:N</text>
+    <line x1="240" y1="73" x2="271" y2="73" class="svg-edge"/><text x="255" y="63" class="svg-t2">1:N</text>
+    <line x1="322" y1="91" x2="322" y2="136" class="svg-edge"/><text x="337" y="118" class="svg-t2">N:1</text>
+    <line x1="197" y1="91" x2="197" y2="136" class="svg-edge"/><text x="212" y="118" class="svg-t2">1:N</text>
+  </g>
+  <rect x="400" y="10" width="370" height="180" rx="12" fill="none" stroke="#2563eb" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="585" y="32" class="svg-t" style="fill:#2563eb;">② Order-Centric (สั่งจอง/สั่งผลิตล่วงหน้า)</text>
+  <g font-size="13">
+    <rect x="415" y="55" width="95" height="36" rx="8" class="svg-n"/><text x="462" y="73" class="svg-t">CUSTOMERS</text>
+    <rect x="545" y="55" width="85" height="36" rx="8" class="svg-n3"/><text x="587" y="73" class="svg-t">ORDERS ⭐</text>
+    <rect x="665" y="55" width="95" height="36" rx="8" class="svg-n2"/><text x="712" y="73" class="svg-t">ORDER_ITEMS</text>
+    <rect x="545" y="140" width="85" height="36" rx="8" class="svg-n2"/><text x="587" y="158" class="svg-t">PAYMENTS</text>
+    <line x1="510" y1="73" x2="541" y2="73" class="svg-edge"/><text x="525" y="63" class="svg-t2">1:N</text>
+    <line x1="630" y1="73" x2="661" y2="73" class="svg-edge"/><text x="645" y="63" class="svg-t2">1:N</text>
+    <line x1="587" y1="91" x2="587" y2="136" class="svg-edge"/><text x="602" y="118" class="svg-t2">1:N</text>
+  </g>
+  <rect x="10" y="210" width="760" height="205" rx="12" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="8 6"/>
+  <text x="390" y="232" class="svg-t" style="fill:#7c3aed;">③ Enterprise Commerce (อีคอมเมิร์ซ/โลจิสติกส์เต็มรูปแบบ) — แยก 3 แกน: Order / Billing / Logistics</text>
+  <g font-size="13">
+    <rect x="40" y="255" width="85" height="36" rx="8" class="svg-n3"/><text x="82" y="273" class="svg-t">ORDERS ⭐</text>
+    <rect x="40" y="345" width="95" height="36" rx="8" class="svg-n2"/><text x="87" y="363" class="svg-t">ORDER_ITEMS</text>
+    <rect x="300" y="255" width="75" height="36" rx="8" class="svg-n3"/><text x="337" y="273" class="svg-t">BILLS</text>
+    <rect x="440" y="255" width="90" height="36" rx="8" class="svg-n2"/><text x="485" y="273" class="svg-t">PAYMENTS</text>
+    <rect x="300" y="345" width="110" height="36" rx="8" class="svg-n3"/><text x="355" y="363" class="svg-t">SHIPMENTS</text>
+    <rect x="540" y="345" width="130" height="36" rx="8" class="svg-n2"/><text x="605" y="363" class="svg-t">SHIPMENT_ITEMS</text>
+    <line x1="125" y1="363" x2="296" y2="290" class="svg-edge"/><text x="200" y="330" class="svg-t2">1:N</text>
+    <line x1="115" y1="273" x2="296" y2="273" class="svg-edge"/><text x="205" y="263" class="svg-t2">1:N</text>
+    <line x1="375" y1="273" x2="436" y2="273" class="svg-edge"/><text x="405" y="263" class="svg-t2">1:N</text>
+    <line x1="355" y1="291" x2="355" y2="341" class="svg-edge"/><text x="370" y="320" class="svg-t2">1:N</text>
+    <line x1="170" y1="363" x2="296" y2="363" class="svg-edge"/><text x="233" y="353" class="svg-t2">1:N (รายการสั่ง ← รายการส่ง)</text>
+  </g>
+</svg><figcaption>รูป 1 — โมเดล 3 แบบ: ยิ่งธุรกิจซับซ้อน (ส่งของ/แบ่งบิล) ยิ่งต้องแยก entity มากขึ้น</figcaption></div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>มิติวิพากษ์</th><th>① Bill-Centric</th><th>② Order-Centric</th><th>③ Enterprise</th></tr>
+  <tr><td>Core Entity</td><td><code>BILLS</code></td><td><code>ORDERS</code></td><td><code>ORDERS</code> (แยก Billing &amp; Logistics ออกหมด)</td></tr>
+  <tr><td>โลจิสติกส์/จัดส่ง</td><td>ไม่รองรับ</td><td>ไม่รองรับ</td><td>รองรับเต็มรูปแบบ (SHIPMENTS, SHIPMENT_ITEMS)</td></tr>
+  <tr><td>ความยืดหยุ่นการชำระเงิน</td><td>จ่ายตามบิลหน้าร้าน</td><td>จ่ายตรงเข้าออเดอร์</td><td>แยกบิลหลายใบ/หลายงวดได้ (Partial/Split Billing)</td></tr>
+  <tr><td>ความซับซ้อน</td><td>ต่ำมาก</td><td>ต่ำ</td><td>สูง (JOIN หลายตาราง, ต้นทุนสูง)</td></tr>
+  <tr><td>เหมาะกับ</td><td>ร้านอาหาร, ร้านค้าปลีกด่วน</td><td>ร้านสั่งจอง, POS สั่งทำ</td><td>E-Commerce, B2B, คลังสินค้า</td></tr>
+</table></div>
+<h3>1.2 สูตรตอบข้อ "จงวิพากษ์โมเดลนี้" 3 ขั้น</h3>
+<div class="steps">
+  <div class="step"><h4>ระบุเจตนาของโจทย์</h4>"ภาพนี้เปรียบเทียบโมเดลหน้าร้านแบบง่าย กับโมเดลพาณิชย์/โลจิสติกส์ระดับองค์กร — วางเครื่องหมาย ≠ เพื่อบอกว่า <em>นำมาแทนกันไม่ได้</em>"</div>
+  <div class="step"><h4>อธิบาย ≠ — ห้ามตัดสินถูก/ผิด!</h4>โมเดลซ้ายขาดโครงสร้างรองรับการจัดส่ง (SHIPMENTS) และการแยกเปิดบิล (BILLS) → ใช้แทนขวาไม่ได้ · ส่วนเอาโมเดลขวาไปใช้กับร้านหน้าร้านธรรมดา = <strong>Over-engineering</strong> ซับซ้อนเกินจำเป็น</div>
+  <div class="step"><h4>ยกสถานการณ์จริงปิดท้าย (คะแนนอยู่ตรงนี้)</h4>"ลูกค้าสั่ง 5 ชิ้น สต็อกพร้อมส่งแค่ 3 ชิ้น → ต้องทยอยส่งรอบแรก 3 ชิ้น รอบสอง 2 ชิ้น — มีแต่โมเดล ③ ที่รองรับได้ผ่าน <code>SHIPMENT_ITEMS</code> (Partial Shipment + Traceability ระดับไอเทม)"</div>
+</div>
+
+<h2 id="normal">[2] Normalization — 40 คะแนน (กินครึ่งข้อสอบ) ⭐</h2>
+<h3>2.1 พื้นฐานที่ต้องรู้ก่อนเข้า NF</h3>
+<div class="grid2">
+<div class="card"><h4>Functional Dependency (FD)</h4><p><code>X → Y</code> อ่านว่า "X กำหนด Y" = รู้ค่า X ตัวเดียวก็รู้ค่า Y แน่นอน เช่น <code>รหัสนักศึกษา → ชื่อ</code> · เหมือน<em>เลขบัตรประชาชน → ชื่อ-เกิด</em> (เลขเดียวกัน = คนเดียวกัน)</p></div>
+<div class="card"><h4>Prime / Non-prime attribute</h4><p><strong>Prime</strong> = attribute ที่เป็นส่วนของ candidate key ใด ๆ · <strong>Non-prime</strong> = ที่เหลือ · กฎ 2NF/3NF พูดถึง non-prime ทั้งคู่!</p></div>
+</div>
+<h3>2.2 บันได 6 ขั้น — แต่ละขั้น "แก้อาการ" อะไร</h3>
+<div class="fig"><svg viewBox="0 0 780 170" role="img" aria-label="normalization ladder">
+  <g font-size="12.5">
+    <rect x="8" y="40" width="108" height="80" rx="10" class="svg-n4"/><text x="62" y="66" class="svg-t">Unnormalized</text><text x="62" y="88" class="svg-t2">ตารางรวมพรึ่ม</text><text x="62" y="106" class="svg-t2">มีกลุ่มซ้ำ</text>
+    <rect x="136" y="40" width="108" height="80" rx="10" class="svg-n2"/><text x="190" y="66" class="svg-t">1NF</text><text x="190" y="88" class="svg-t2">ค่าอะตอมมิก</text><text x="190" y="106" class="svg-t2">ไม่มี repeating group</text>
+    <rect x="264" y="40" width="108" height="80" rx="10" class="svg-n2"/><text x="318" y="66" class="svg-t">2NF</text><text x="318" y="88" class="svg-t2">ไม่มี partial</text><text x="318" y="106" class="svg-t2">dependency</text>
+    <rect x="392" y="40" width="108" height="80" rx="10" class="svg-n"/><text x="446" y="66" class="svg-t">3NF</text><text x="446" y="88" class="svg-t2">ไม่มี transitive</text><text x="446" y="106" class="svg-t2">dependency</text>
+    <rect x="520" y="40" width="108" height="80" rx="10" class="svg-n"/><text x="574" y="66" class="svg-t">BCNF</text><text x="574" y="88" class="svg-t2">ทุก determinant</text><text x="574" y="106" class="svg-t2">เป็น candidate key</text>
+    <rect x="648" y="40" width="120" height="80" rx="10" class="svg-n3"/><text x="708" y="60" class="svg-t">4NF / 5NF</text><text x="708" y="82" class="svg-t2">ไม่มี multivalued</text><text x="708" y="100" class="svg-t2">/ join dependency</text>
+    <text x="122" y="140" class="svg-t2">แยกแถว</text><text x="250" y="140" class="svg-t2">แยกตาราง</text><text x="378" y="140" class="svg-t2">แยกตาราง</text><text x="506" y="140" class="svg-t2">ตรวจ key</text><text x="640" y="140" class="svg-t2">จัดการความสัมพันธ์หลายค่า</text>
+  </g>
+</svg><figcaption>รูป 2 — ยิ่งขึ้นสูง ยิ่งลด redundancy/anomaly แต่ JOIN มากขึ้น</figcaption></div>
+
+<h4>ตารางตัวอย่างใช้ร่วมทั้งบท: ใบสั่งซื้อ</h4>
+<div class="tblwrap"><table class="tbl" style="min-width:560px;">
+  <tr><th>OrderID</th><th>ProductID</th><th>ProductName</th><th>Qty</th><th>CustomerName</th><th>CustomerPhone (หลายเบอร์)</th></tr>
+  <tr><td class="num">O1</td><td class="num">P1</td><td>Mouse</td><td class="num">2</td><td>Somchai</td><td>081-xxx, 089-yyy</td></tr>
+  <tr><td class="num">O1</td><td class="num">P2</td><td>Keyboard</td><td class="num">1</td><td>Somchai</td><td>081-xxx, 089-yyy</td></tr>
+  <tr><td class="num">O2</td><td class="num">P1</td><td>Mouse</td><td class="num">1</td><td>Suda</td><td>092-zzz</td></tr>
+</table></div>
+<div class="steps">
+  <div class="step"><h4>1NF — ทุกช่องต้องเป็นค่าเดี่ยว (atomic) ไม่มี repeating group</h4>แก้: แยกเบอร์โทรออกเป็นแถวละ 1 เบอร์ (หรือตารางใหม่) — key รวม (OrderID, ProductID) · <em>เปรียบเทียบ: ที่จอดรถต้องจอดทีละคัน ห้ามจอด 2 คันในช่องเดียว</em></div>
+  <div class="step"><h4>2NF — อยู่ใน 1NF + ไม่มี <strong>partial dependency</strong></h4>ปัญหา: <code>ProductName</code> ขึ้นกับ <strong>ProductID ตัวเดียว</strong> (ส่วนหนึ่งของ key รวม) → แยกตาราง Product(ProductID, ProductName) ออก · <em>เปรียบเทียบ: key รวมคือคู่แต่งงาน แต่ข้อมูลบางอย่างรู้จัก "คนเดียว" ก็พอ — ของที่รู้จากคนเดียวให้แยกบ้าน</em></div>
+  <div class="step"><h4>3NF — อยู่ใน 2NF + ไม่มี <strong>transitive dependency</strong></h4>สมมติมี <code>CustomerID → City → ShippingFee</code> (รู้จังหวัดก็รู้ค่าส่ง) — ShippingFee ขึ้นกับ City ที่ไม่ใช่ key → แยกตาราง City(City, ShippingFee) · สูตรจำ: <strong>"non-key ห้ามกำหนด non-key ด้วยกัน"</strong></div>
+</div>
+<h3>2.3 BCNF — เวอร์ชันเข้มของ 3NF (ข้อต่างเป็นโจทย์โปรด)</h3>
+<div class="box exam"><span class="bt">3NF vs BCNF ต่างกันยังไง (ตอบสั้น ๆ ตรงนี้ได้คะแนน)</span>
+<strong>3NF:</strong> ทุก FD <code>X → A</code> ต้องมี (ก) X เป็น superkey <strong>หรือ</strong> (ข) A เป็น prime attribute — ให้อภัยกรณีที่ตัวถูกกำหนดเป็น prime<br>
+<strong>BCNF:</strong> เข้มขึ้น — <strong>ทุก determinant ต้องเป็น superkey เท่านั้น</strong> ไม่มีข้อยกเว้น<br>
+ตัวอย่างคลาสสิก: ตาราง (Student, Subject, Teacher) กฎ "อาจารย์ 1 คน สอน 1 วิชา" (<code>Teacher → Subject</code>) และ "นักศึกษา 1 คนต่อวิชา มีอาจารย์คนเดียว" (<code>{Student, Subject} → Teacher</code>) → Teacher กำหนด Subject แต่ Teacher ไม่ใช่ candidate key → 3NF ผ่าน (Subject เป็น prime) แต่ BCNF <strong>ไม่ผ่าน</strong> → ต้องแยก (Student, Teacher) กับ (Teacher, Subject)</div>
+<h3>2.4 4NF — จัดการ Multi-valued Dependency</h3>
+<p>เกิดเมื่อตารางมี<strong>ข้อมูลอิสระสองชุดที่หลายค่า</strong> อยู่รวมกัน เช่น พนักงานคนเดียวมีหลาย skill และ (อิสระจากกัน) พูดได้หลายภาษา:</p>
+<div class="tblwrap"><table class="tbl" style="min-width:420px;">
+  <tr><th>Employee</th><th>Skill</th><th>Language</th><th>ปัญหา</th></tr>
+  <tr><td>Ann</td><td>SQL</td><td>ไทย</td><td rowspan="3">ต้องเก็บแบบ cross product: 2 skills × 2 ภาษา = 4 แถว ซ้ำ ๆ · เพิ่มภาษาใหม่ 1 ภาษาต้องใส่ครบทุก skill → <strong>update anomaly</strong></td></tr>
+  <tr><td>Ann</td><td>SQL</td><td>อังกฤษ</td></tr>
+  <tr><td>Ann</td><td>Java</td><td>ไทย</td></tr>
+</table></div>
+<p><strong>4NF:</strong> อยู่ใน BCNF + ไม่มี nontrivial multivalued dependency (ยกเว้น determinant เป็น superkey) → แก้ด้วยการ<strong>แยกเป็นสองตาราง</strong>: (Employee, Skill) และ (Employee, Language) · <em>เปรียบเทียบ: ข้อมูลสองเรื่องที่ "ไม่เกี่ยวกันเลย" ห้ามบังคับให้เกิดเป็นคู่ — แยกสมุดจดสองเล่ม</em></p>
+<h3>2.5 5NF — Join Dependency (ขั้นสูงสุด)</h3>
+<p>ตารางถูกแบ่งย่อยได้เป็น <strong>3 ตารางขึ้นไป</strong> แล้ว join กลับมาได้ข้อมูลเดิมพอดี <strong>โดยไม่มีแถวหลอน (spurious tuples)</strong> ที่ไม่ควรเกิด · เงื่อนไขคลาสสิก: ตาราง (Dealer, Product, Customer) ที่มีกฎสามเส้นทาง "ดีลเลอร์ขายสินค้าอะไร" + "ลูกค้าซื้อจากดีลเลอร์ไหน" + "ลูกค้าซื้อสินค้าอะไร" ครบสามชุด → เก็บแยก 3 ตาราง แล้ว join กลับจะยังตรงความจริงธุรกิจ · ถ้าแบ่ง 2 ตารางแล้ว join กลับเกิดแถวเก๊ = ยังไม่ผ่าน 5NF</p>
+<div class="box ok"><span class="bt">สูตรตอบข้อ Normalization ในข้อสอบ (เขียนตามนี้ทุกข้อ)</span>
+① ระบุ key และ FD ทั้งหมดก่อน → ② ชี้ "อาการ" ที่ผิดระดับ NF นั้น (partial/transitive/multivalued) พร้อมเขียน FD ที่ผิด → ③ แสดงการแยกตาราง (เขียน schema ใหม่ + กำกับ key) → ④ ตรวจว่าแต่ละตารางผ่านระดับนั้นแล้ว และ <strong>join กลับได้ข้อมูลเดิมไม่หายไม่เกิน</strong> (lossless join)</div>
+
+<h2 id="txn">[3] Transaction Processing — Recovery + Concurrency (30 คะแนน) ⭐</h2>
+<h3>3.1 Transaction &amp; ACID (พื้นฐานต้องพิมพ์ได้)</h3>
+<div class="box tip"><span class="bt">Transaction = หน่วยงานเชิงตรรกะที่ต้อง "สำเร็จทั้งหมดหรือไม่ทำเลย"</span>
+เหมือน<em>โอนเงิน</em>: หักบัญชี A + เพิ่มบัญชี B ต้องเกิดคู่กัน — หักแล้วระบบล่มก่อนเพิ่ม = โลกพัง จึงต้อง ROLLBACK</div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ACID</th><th>แปลว่า</th><th>ตัวอย่าง (โอนเงิน)</th></tr>
+  <tr><td><strong>A</strong>tomicity</td><td>ทำครบทั้งหน่วยหรือไม่ทำเลย</td><td>หัก A แล้วเพิ่ม B ต้องสำเร็จทั้งคู่ ไม่งั้นยกเลิกทั้งคู่</td></tr>
+  <tr><td><strong>C</strong>onsistency</td><td>ก่อน-หลัง transaction ฐานข้อมูลถูกต้องตามกฎเสมอ</td><td>ผลรวมเงิน A+B เท่าเดิมทุกครั้ง</td></tr>
+  <tr><td><strong>I</strong>solation</td><td>transaction พร้อมกันไม่แทรกกันจนงง</td><td>คนอื่นไม่ควรเห็นสถานะ "หักแล้วยังไม่เพิ่ม" ค้าง ๆ</td></tr>
+  <tr><td><strong>D</strong>urability</td><td>commit แล้วข้อมูลอยู่จริงแม้ไฟดับ</td><td>โอนเสร็จ ไฟดับ เงินก็ยังเข้าบัญชี B</td></tr>
+</table></div>
+<h3>3.2 Recovery Control — Log-based Recovery (ออก "ทำ log rollback เหมือนในสไลด์")</h3>
+<p><strong>Recovery</strong> = ทำให้ DB กลับสู่สถานะถูกต้องหลังพัง (crash) · เครื่องมือหลักคือ <strong>log file</strong> — จดทุกการเปลี่ยนแปลงลง log <strong>ก่อนแตะข้อมูลจริง</strong> (WAL: Write-Ahead Log เหมือน<em>จดใบเสร็จไว้ก่อนเอาของออกจากคลัง</em>)</p>
+<pre><code>&lt;T1, start&gt;
+&lt;T1, X, 100, 200&gt;      <span class="cm">/* T1 เปลี่ยน X: เดิม 100 → ใหม่ 200 (จด old &amp; new value) */</span>
+&lt;T1, Y, 50, 80&gt;
+&lt;T1, commit&gt;</code></pre>
+<div class="grid2">
+<div class="card"><h4>Deferred Update (เขียนเมื่อ commit แล้ว)</h4><p>เก็บเขียนไว้ที่ log ก่อน รอ commit ค่อยลง DB จริง<br><strong>พังก่อน commit</strong> → <em>ไม่ต้องทำอะไร</em> (DB ยังไม่เปลี่ยน) · <strong>พังหลัง commit</strong> → <strong>REDO</strong> จาก log</p></div>
+<div class="card"><h4>Immediate Update (เขียนทันทีได้)</h4><p>เขียนลง DB ได้ก่อน commit<br><strong>พังก่อน commit</strong> → <strong>UNDO</strong> (ใช้ old value คืน) · <strong>พังหลัง commit</strong> → REDO (ใช้ new value)</p></div>
+</div>
+<h4>ตัวอย่างไล่ rollback ตามสไลด์ (checkpoint)</h4>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>กรณี (หลัง crash)</th><th>สถานะตาม log</th><th>ต้องทำอะไร</th></tr>
+  <tr><td>T1</td><td>commit ก่อน checkpoint</td><td>ไม่ต้องทำอะไร (เขียนถึง disk แล้ว)</td></tr>
+  <tr><td>T2</td><td>start ก่อน checkpoint, commit หลัง crash ไม่ทัน</td><td><strong>UNDO</strong> (คืน old value ทุก item)</td></tr>
+  <tr><td>T3</td><td>start ก่อน checkpoint, commit หลัง checkpoint ก่อนพัง</td><td><strong>REDO</strong> (เผื่อเขียนไม่ครบ disk)</td></tr>
+  <tr><td>T4</td><td>start หลัง checkpoint ไม่มี commit</td><td><strong>UNDO</strong></td></tr>
+</table></div>
+<p><strong>Checkpoint</strong> = จุดถ่ายรูป: ล้านข้อมูลค้างจาก buffer ลง disk + จดใน log — พังแล้วไม่ต้องไล่ log ตั้งแต่ต้น (เหมือนเซฟเกมเป็นระยะ)</p>
+<h3>3.3 Concurrency Control — ปัญหา + วิธีคุม (2 ข้อใหญ่!) ⭐</h3>
+<p><strong>Concurrency Control</strong> = เทคนิคคุม transaction หลายตัวที่รันพร้อมกันให้ผลลัพธ์เหมือน "รันเรียงกันตัวต่อตัว" (serializable) โดยไม่ทำให้ข้อมูลเสีย</p>
+<h4>ปัญหาคลาสสิก 4 อาการ (เห็นตารางไทม์ไลน์แล้วต้องเรียกชื่อได้)</h4>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>อาการ</th><th>เกิดยังไง (ไทม์ไลน์)</th><th>เหมือน</th></tr>
+  <tr><td><strong>Lost Update</strong></td><td>T1 อ่าน X=100 → T2 อ่าน X=100 → T1 เขียน 110 → T2 เขียน 120 → ผลสุดท้าย 120 <strong>หายไป 10 ที่ T1 เพิ่ม</strong></td><td>สองคนแก้ไฟล์ Google Doc จากของเก่าทั้งคู่ ของคนแรกถูกทับ</td></tr>
+  <tr><td><strong>Dirty Read</strong></td><td>T1 เขียน X=200 ยังไม่ commit → T2 อ่าน 200 ไปใช้ → T1 <strong>rollback</strong> กลับ 100 → T2 ใช้ค่าปลอม</td><td>ซื้อของตามป้ายราคาที่พนักงานยังไม่ยืนยัน สุดท้ายราคาถูกยกเลิก</td></tr>
+  <tr><td><strong>Unrepeatable Read</strong></td><td>T1 อ่าน X=100 → T2 เปลี่ยน X=200 + commit → T1 อ่านซ้ำได้ 200 ≠ 100</td><td>ดูราคาวันนี้ 100 นาทีเดียวกลับมาดูใหม่กลายเป็น 200</td></tr>
+  <tr><td><strong>Phantom Read</strong></td><td>T1 นับแถว "ออเดอร์วันนี้" ได้ 10 → T2 <strong>insert</strong> ออเดอร์ใหม่ + commit → T1 นับซ้ำได้ 11</td><td>นับคนในห้อง 10 คน มีคนเดินเข้ามา กลายเป็น 11 (ผีเพิ่มแถวใหม่)</td></tr>
+</table></div>
+<h4>วิธีคุม 3 แบบหลัก</h4>
+<div class="grid3">
+<div class="card"><h4>① Locking (2PL)</h4><p>อ่าน = Shared lock (คนละคนได้) · เขียน = Exclusive lock (คนเดียว) · <strong>Two-Phase Locking</strong>: ช่วง growing (ล็อกได้เรื่อย ๆ ปลดไม่ได้) → ช่วง shrinking (ปลดได้อย่างเดียว ล็อกใหม่ไม่ได้) — การันตี serializable · ข้อเสีย: เกิด deadlock ได้ (รอ lock กัน)</p></div>
+<div class="card"><h4>② Timestamp Ordering</h4><p>จ่ายเลขคิว (timestamp) ให้แต่ละ transaction · ถ้า T เก่ากว่าพยายามเขียนทับข้อมูลที่ "คนคิวใหม่เขียนไปแล้ว" → ผิดลำดับ → <strong>rollback ทั้ง transaction</strong> แล้วเริ่มใหม่ (ไม่มี lock ไม่มี deadlock แต่ต้องยอม restart)</p></div>
+<div class="card"><h4>③ Optimistic (Validation)</h4><p>เชื่อว่าชนกันน้อย: อ่าน-ทำงานเงียบ ๆ ก่อน → ตอนจบค่อย<strong>ตรวจว่าชนใครไหม</strong> → ไม่ชนค่อย commit, ชน = rollback · เหมาะกับงานอ่านเยอะ</p></div>
+</div>
+<div class="box ok"><span class="bt">สูตรตอบข้อ Concurrency Control (2 ข้อใหญ่ 30 คะแนน)</span>
+① นิยาม: "เทคนิคจัดการ transaction พร้อมกันหลายตัวให้ผลเหมือนรันเรียงกัน (serializable) ป้องกัน lost update / dirty read / unrepeatable read / phantom" → ② อธิบายกลไกที่เลือก (เช่น 2PL: shared/exclusive lock + 2 เฟส) → ③ <strong>ยกตัวอย่างไทม์ไลน์ T1/T2 พร้อมตารางเวลา</strong> แสดงว่าโดยไม่คุมเกิดอาการไหน และเมื่อใช้ล็อกแล้วจังหวะไหนรอ/สำเร็จ → ④ สรุปผลว่าคุณสมบัติใดถูกรักษา</div>
+
+<h2 id="concept">[4] DB Concept (10 คะแนน) — คำถามสั้นที่ต้องตอบไว</h2>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>คำถามที่เคยออก</th><th>คำตอบแบบเขียนในข้อสอบ</th></tr>
+  <tr><td>ฐานข้อมูลคืออะไร + ตัวอย่าง</td><td>คอลเลกชันข้อมูลที่<strong>เกี่ยวข้องกัน</strong> จัดระเบียบลดซ้ำซ้อน ให้หลายคน/หลายโปรแกรมใช้ร่วมกันได้ · ตัวอย่าง: ระบบทะเบียนนักศึกษา, ระบบ POS ร้านสะดวกซื้อ</td></tr>
+  <tr><td>DBMS คืออะไร + ตัวอย่าง</td><td>ซอฟต์แวร์กลางที่จัดการฐานข้อมูล (สร้าง/ค้น/แก้/ลบ/กำหนดสิทธิ/สำรอง) ระหว่างผู้ใช้กับข้อมูล · ตัวอย่าง: MySQL, PostgreSQL, Oracle, SQL Server, MongoDB</td></tr>
+  <tr><td>การลดความซ้ำซ้อน (redundancy)</td><td>ออกแบบตาราง + normalization ให้ข้อมูลจริงเก็บ<em>ที่เดียว</em> ส่วนที่อื่นเก็บแค่ key ไปอ้าง (FK) — ลดพื้นที่ + ลด anomaly (แก้ที่เดียวอัปเดตทุกที่)</td></tr>
+  <tr><td>Transaction คืออะไร</td><td>ดูหัวข้อ [3.1] — หน่วยงานเชิงตรรกะ สำเร็จทั้งหมดหรือไม่ทำเลย + ACID</td></tr>
+  <tr><td>Recovery Control คือ</td><td>กลไกกู้คืนข้อมูลสู่สถานะถูกต้องหลังความล้มเหลว (log, checkpoint, undo/redo)</td></tr>
+  <tr><td>Concurrency Control คือ</td><td>ดูหัวข้อ [3.3]</td></tr>
+  <tr><td>Primary key คือ / key อื่น ๆ</td><td>ดูตาราง key ด้านล่าง</td></tr>
+</table></div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ชนิด Key</th><th>ความหมาย</th><th>ตัวอย่าง (ตารางนักศึกษา)</th></tr>
+  <tr><td>Super key</td><td>ชุด attribute ใด ๆ ที่ระบุแถวได้ไม่ซ้ำ</td><td>{StudentID}, {StudentID, Name}, {Email, Name}…</td></tr>
+  <tr><td>Candidate key</td><td>superkey ที่<strong>เล็กที่สุด</strong> (ไม่มีตัวเกิน)</td><td>{StudentID}, {Email}</td></tr>
+  <tr><td>Primary key</td><td>candidate key ที่ถูกเลือกเป็นตัวหลัก ห้าม NULL ซ้ำ</td><td>StudentID</td></tr>
+  <tr><td>Alternate key</td><td>candidate key ที่ไม่ได้เป็น primary</td><td>Email</td></tr>
+  <tr><td>Composite key</td><td>key ที่ใช้หลายคอลัมน์รวมกัน</td><td>{OrderID, ProductID}</td></tr>
+  <tr><td>Foreign key</td><td>คอลัมน์ที่อ้าง PK ของตารางอื่น (คุมความถูกต้องระหว่างตาราง)</td><td>OrderItems.OrderID → Orders.OrderID</td></tr>
+</table></div>
+
+<h2 id="dw">[5] Data Warehouse (15 คะแนน — ไม่ออกออกแบบ เน้นความรู้เบื้องต้น)</h2>
+<div class="box tip"><span class="bt">นิยามของ Bill Inmon (ท่องได้ = ครึ่งหนึ่งของคะแนน)</span>
+"Data Warehouse คือคอลเลกชันข้อมูลที่ <strong>subject-oriented · integrated · time-variant · non-volatile</strong> เพื่อสนับสนุนการตัดสินใจ (รายงาน/วิเคราะห์) ไม่ใช่การทำธุรกรรมรายวัน"</div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>คุณสมบัติ 4 ข้อ</th><th>แปลว่า</th><th>เหมือน</th></tr>
+  <tr><td>Subject-oriented</td><td>จัดรอบ "หัวข้อธุรกิจ" (ลูกค้า, การขาย) ไม่ใช่รอบแอป</td><td>ลิ้นชักจัดตามหมวดของ</td></tr>
+  <tr><td>Integrated</td><td>รวมข้อมูลจากหลายระบบให้รูปแบบเดียวกัน (หน่วย, รหัส)</td><td>รวมบัญชีทุกสาขาใช้สกุลเดียว</td></tr>
+  <tr><td>Time-variant</td><td>เก็บข้อมูลย้อนหลังหลายปี มีมิติเวลาเสมอ</td><td>สมุดปูมบันทึกย้อน 10 ปี</td></tr>
+  <tr><td>Non-volatile</td><td>ไม่อัปเดต/ลบทิ้งรายวัน — เขียนครั้งเดียวอ่านบ่อย ๆ</td><td>หนังสือพิมพ์เก็บไว้เป็นประวัติ ไม่แก้ย้อนหลัง</td></tr>
+</table></div>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>เทียบ</th><th>OLTP (ระบบธุรกรรม)</th><th>OLAP / DW (ระบบวิเคราะห์)</th></tr>
+  <tr><td>จุดประสงค์</td><td>รันธุรกรรมรายวัน (ขายของ, โอนเงิน)</td><td>วิเคราะห์/รายงานสำหรับผู้บริหาร</td></tr>
+  <tr><td>ลักษณะคำสั่ง</td><td>INSERT/UPDATE สั้น ๆ ถี่ ๆ</td><td>SELECT ซับซ้อน aggregate หนัก</td></tr>
+  <tr><td>ข้อมูล</td><td>ปัจจุบัน ปกติ</td><td>ประวัติยาว รวมจากหลายแหล่ง</td></tr>
+  <tr><td>ผู้ใช้</td><td>พนักงาน/ลูกค้า จำนวนมาก</td><td>นักวิเคราะห์/ผู้บริหาร ไม่กี่คน</td></tr>
+  <tr><td>ขนาดต่อคำสั่ง</td><td>แตะแถวไม่กี่แถว</td><td>สแกนล้านแถว</td></tr>
+</table></div>
+<h3>สถาปัตยกรรมพื้นฐาน: ETL → DW → Data Mart → BI</h3>
+<div class="fig"><svg viewBox="0 0 780 150" role="img" aria-label="DW pipeline">
+  <defs><marker id="dw" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="svg-arrowhead"/></marker></defs>
+  <g font-size="13">
+    <rect x="15" y="45" width="120" height="60" rx="10" class="svg-n2"/><text x="75" y="70" class="svg-t">แหล่งข้อมูล</text><text x="75" y="90" class="svg-t2">POS · CRM · ERP</text>
+    <rect x="185" y="45" width="90" height="60" rx="10" class="svg-n"/><text x="230" y="70" class="svg-t">ETL</text><text x="230" y="90" class="svg-t2">Extract-Transform-Load</text>
+    <rect x="325" y="45" width="130" height="60" rx="10" class="svg-n3"/><text x="390" y="70" class="svg-t">Data Warehouse</text><text x="390" y="90" class="svg-t2">ข้อมูลรวม + ประวัติ</text>
+    <rect x="505" y="45" width="110" height="60" rx="10" class="svg-n2"/><text x="560" y="70" class="svg-t">Data Mart</text><text x="560" y="90" class="svg-t2">DW เฉพาะแผนก</text>
+    <rect x="665" y="45" width="100" height="60" rx="10" class="svg-n"/><text x="715" y="70" class="svg-t">BI/รายงาน</text><text x="715" y="90" class="svg-t2">Dashboard · OLAP</text>
+    <line x1="135" y1="75" x2="181" y2="75" class="svg-arrow" marker-end="url(#dw)"/>
+    <line x1="275" y1="75" x2="321" y2="75" class="svg-arrow" marker-end="url(#dw)"/>
+    <line x1="455" y1="75" x2="501" y2="75" class="svg-arrow" marker-end="url(#dw)"/>
+    <line x1="615" y1="75" x2="661" y2="75" class="svg-arrow" marker-end="url(#dw)"/>
+  </g>
+</svg><figcaption>รูป 3 — ข้อมูลไหลจากระบบธุรกรรม → คัดแปลง (ETL) → คลังข้อมูล → ชุดย่อยแต่ละแผนก → รายงาน</figcaption></div>
+<h3>Star Schema vs Snowflake Schema (รู้ความต่าง — ไม่ต้องออกแบบ)</h3>
+<div class="grid2">
+<div class="card"><h4>Star Schema ⭐</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 300 170">
+  <rect x="100" y="60" width="100" height="50" rx="10" class="svg-n3"/><text x="150" y="80" class="svg-t">FactSales</text><text x="150" y="98" class="svg-t2">ตัวเลขวัดผล + FK</text>
+  <rect x="10" y="10" width="95" height="34" rx="8" class="svg-n"/><text x="57" y="28" class="svg-t">DimDate</text>
+  <rect x="195" y="10" width="95" height="34" rx="8" class="svg-n"/><text x="242" y="28" class="svg-t">DimProduct</text>
+  <rect x="10" y="125" width="95" height="34" rx="8" class="svg-n"/><text x="57" y="143" class="svg-t">DimCustomer</text>
+  <rect x="195" y="125" width="95" height="34" rx="8" class="svg-n"/><text x="242" y="143" class="svg-t">DimStore</text>
+  <line x1="80" y1="44" x2="120" y2="60" class="svg-edge"/><line x1="220" y1="44" x2="180" y2="60" class="svg-edge"/>
+  <line x1="80" y1="125" x2="120" y2="110" class="svg-edge"/><line x1="220" y1="125" x2="180" y2="110" class="svg-edge"/>
+</svg></div><p style="font-size:14px;">Fact ตรงกลาง + Dimension ล้อมรอบ เชื่อมตรง ๆ ทุกอัน — <strong>dimension ไม่แตกย่อย</strong> · JOIN น้อย คิวรีไว · โครงง่าย</p></div>
+<div class="card"><h4>Snowflake Schema ❄️</h4>
+<div class="fig" style="margin:6px 0;box-shadow:none;border:none;padding:4px;"><svg viewBox="0 0 300 170">
+  <rect x="100" y="60" width="100" height="50" rx="10" class="svg-n3"/><text x="150" y="80" class="svg-t">FactSales</text><text x="150" y="98" class="svg-t2">+ FK</text>
+  <rect x="10" y="10" width="95" height="34" rx="8" class="svg-n"/><text x="57" y="28" class="svg-t">DimProduct</text>
+  <rect x="30" y="120" width="110" height="34" rx="8" class="svg-n"/><text x="85" y="138" class="svg-t">DimCategory</text>
+  <line x1="80" y1="44" x2="120" y2="60" class="svg-edge"/><line x1="70" y1="44" x2="85" y2="116" class="svg-edge"/>
+  <line x1="130" y1="60" x2="130" y2="116" class="svg-edge"/>
+  <text x="160" y="135" class="svg-t2" style="text-anchor:start;">dimension "แตกกิ่ง"</text>
+  <text x="160" y="152" class="svg-t2" style="text-anchor:start;">เป็นตารางย่อยซ้อน</text>
+</svg></div><p style="font-size:14px;">dimension ถูก<strong>ปรับให้เป็นปกติ (normalized) แตกเป็นตารางย่อย</strong> เช่น Product → Category → หมวดใหญ่ · ลดซ้ำซ้อนใน dimension แต่ JOIN เพิ่ม คิวรีช้าลง</p></div>
+</div>
+
+<h2 id="sql">[6] SQL — Outer JOIN, Subquery, Correlated Subquery (15 คะแนน)</h2>
+<h3>6.1 ตารางตัวอย่าง (จำผลลัพธ์ได้ = ทำข้อสอบทัน)</h3>
+<div class="grid2">
+<div class="tblwrap"><table class="tbl" style="min-width:260px;">
+  <tr><th colspan="3">Customers</th></tr>
+  <tr><th>ID</th><th>ชื่อ</th><th>เมือง</th></tr>
+  <tr><td class="num">1</td><td>Somchai</td><td>BKK</td></tr>
+  <tr><td class="num">2</td><td>Suda</td><td>Chonburi</td></tr>
+  <tr><td class="num">3</td><td>Mana</td><td>BKK</td></tr>
+</table></div>
+<div class="tblwrap"><table class="tbl" style="min-width:260px;">
+  <tr><th colspan="3">Orders</th></tr>
+  <tr><th>OrderID</th><th>CustID</th><th>ยอด</th></tr>
+  <tr><td class="num">A1</td><td class="num">1</td><td class="num">500</td></tr>
+  <tr><td class="num">A2</td><td class="num">1</td><td class="num">300</td></tr>
+  <tr><td class="num">A3</td><td class="num">3</td><td class="num">200</td></tr>
+  <tr><td class="num">A4</td><td class="num">9</td><td class="num">99</td> <span style="color:var(--bad-ink);">(ไม่มีใน Customers!)</span></td></tr>
+</table></div>
+</div>
+<h3>6.2 JOIN ทั้งหมด + ผลลัพธ์จริง ⭐</h3>
+<div class="fig"><svg viewBox="0 0 760 130" role="img" aria-label="join venn">
+  <g font-size="13">
+    <circle cx="180" cy="60" r="52" fill="var(--accent-soft)" stroke="var(--accent)" stroke-width="2"/>
+    <circle cx="250" cy="60" r="52" fill="var(--warn-bg)" stroke="#d97706" stroke-width="2"/>
+    <text x="140" y="64" class="svg-t">A</text><text x="295" y="64" class="svg-t">B</text>
+    <text x="180" y="120" class="svg-t2">CustID ตรงกัน = ตัวจริง (Somchai×2, Mana×1)</text>
+  </g>
+</svg><figcaption>รูป 4 — INNER = โซนทับกัน · OUTER = เอาฝั่งที่ไม่ทับมาโชว์ด้วย (ช่องที่ไม่มี = NULL)</figcaption></div>
+<pre><code><span class="cm">-- INNER JOIN: เอาเฉพาะคู่ที่ตรงกัน (คนอื่นหายหมด)</span>
+SELECT c.ชื่อ, o.OrderID, o.ยอด
+FROM Customers c INNER JOIN Orders o ON c.ID = o.CustID;
+
+<span class="cm">-- LEFT OUTER JOIN: ลูกค้าทุกคนต้องโผล่ แม้ไม่เคยสั่ง (Suda ต้องมี!)</span>
+SELECT c.ชื่อ, o.OrderID
+FROM Customers c LEFT JOIN Orders o ON c.ID = o.CustID;
+
+<span class="cm">-- FULL OUTER JOIN: ทั้งสองฝั่งครบ (รวม Order A4 ที่ไม่มีเจ้าของด้วย)</span>
+SELECT c.ชื่อ, o.OrderID
+FROM Customers c FULL OUTER JOIN Orders o ON c.ID = o.CustID;</code></pre>
+<div class="tblwrap"><table class="tbl">
+  <tr><th>ชนิด</th><th>ผลลัพธ์ (ชื่อ · OrderID)</th><th>จุดสังเกต</th></tr>
+  <tr><td>INNER</td><td>Somchai·A1, Somchai·A2, Mana·A3</td><td>3 แถว · Suda หาย, A4 หาย</td></tr>
+  <tr><td>LEFT</td><td>Somchai·A1, Somchai·A2, Suda·<strong>NULL</strong>, Mana·A3</td><td>4 แถว · ฝั่งลูกค้าครบ — <em>โจทย์ "หาลูกค้าที่ไม่เคยสั่ง" ใช้ตัวนี้ + WHERE OrderID IS NULL</em></td></tr>
+  <tr><td>RIGHT</td><td>Somchai·A1, Somchai·A2, Mana·A3, <strong>NULL</strong>·A4</td><td>ฝั่งออเดอร์ครบ</td></tr>
+  <tr><td>FULL</td><td>รวมทุกแถวทั้งสองฝั่ง = 5 แถว (Suda และ A4 เป็น NULL คนละจุด)</td><td>ทั้งสองฝั่งไม่ตกหล่น</td></tr>
+</table></div>
+<h3>6.3 Subquery (ไม่เกี่ยวข้องกัน) vs Correlated Subquery ⭐</h3>
+<div class="grid2">
+<div class="card"><h4>Subquery ปกติ (run ครั้งเดียวจบ)</h4>
+<pre><code>SELECT ชื่อ FROM Customers
+WHERE เมือง = 'BKK'
+  AND ID IN (SELECT CustID
+             FROM Orders);</code></pre>
+<p style="font-size:14px;color:var(--ink-soft);">วงใน "รันตั้งแต่ต้นแล้วจบ" ได้รายชื่อ {1,3} → วงนอกเอาไปเทียบ · เหมือน<em>โน้ตรายชื่อเสร็จแล้วค่อยเอาไปหา</em></p></div>
+<div class="card"><h4>Correlated Subquery (วนรัน "ต่อแถว" ของวงนอก)</h4>
+<pre><code>SELECT ชื่อ,
+ (SELECT SUM(ยอด) FROM Orders o
+  WHERE o.CustID = c.ID) AS ยอดรวม
+FROM Customers c;</code></pre>
+<p style="font-size:14px;color:var(--ink-soft);">วงใน<em>อ้าง c.ID ของวงนอก</em> → ต้องรันใหม่ทุกแถวลูกค้า (Somchai=800, Suda=NULL, Mana=200) · เหมือน<em>เดินไปถามทีละคนว่า "ซื้อไปเท่าไหร่" แล้วจดท้ายชื่อ</em> — ช้ากว่าแต่ทำเคสที่ subquery ปกติทำไม่ได้</p></div>
+</div>
+<div class="box exam"><span class="bt">แนวคำถาม SQL ที่เคยออก (ฝึกพิมพ์ได้จริง)</span>
+① รายชื่อลูกค้าที่<strong>ไม่เคย</strong>สั่งซื้อ (LEFT JOIN … IS NULL หรือ NOT EXISTS) ·
+② ยอดรวมสั่งซื้อของแต่ละลูกค้า (correlated subquery หรือ GROUP BY) ·
+③ ลูกค้าที่ยอดสั่งซื้อสูงกว่า "ค่าเฉลี่ยทั้งหมด" (subquery ใน HAVING) ·
+④ ออเดอร์ที่ไม่มีลูกค้าตรง (RIGHT/FULL JOIN … IS NULL) ·
+⑤ ลูกค้าจากเมืองเดียวกับ 'Somchai' (subquery อ้างตารางเดียวกัน)</div>
+
+<h2 id="checklist">✅ เช็กลิสต์คืนก่อนสอบ</h2>
+<div class="grid2">
+<div class="card"><h4>ตอนที่ต้อง "ฝึกมือ"</h4><ul>
+<li>☐ แยก 1NF→2NF→3NF จากตารางใหญ่ (เขียน schema ใหม่ + FD)</li>
+<li>☐ อธิบาย 3NF vs BCNF พร้อมตัวอย่าง (Student-Subject-Teacher)</li>
+<li>☐ 4NF: แยก multivalued 2 ชุด · 5NF: join 3 ตารางไม่เกิดแถวเก๊</li>
+<li>☐ เขียน log + ตัดสิน UNDO/REDO ตามจุด checkpoint</li>
+<li>☐ วาดไทม์ไลน์ lost update / dirty read / phantom</li>
+<li>☐ SQL: LEFT JOIN ... IS NULL, correlated subquery, HAVING + subquery</li>
+</ul></div>
+<div class="card"><h4>ตอนที่ต้อง "ท่อง"</h4><ul>
+<li>☐ ACID 4 คำ + ตัวอย่างโอนเงิน</li>
+<li>☐ DW 4 คุณสมบัติ (subject-oriented, integrated, time-variant, non-volatile)</li>
+<li>☐ OLTP vs OLAP อย่างน้อย 3 แถว</li>
+<li>☐ Star vs Snowflake (แตกย่อย vs ไม่แตก)</li>
+<li>☐ Key 6 ชนิด · นิยาม DB/DBMS/Transaction/Recovery/Concurrency</li>
+<li>☐ วิพากษ์ 3 โมเดล + สูตรตอบ 3 ขั้น (No Silver Bullet, ≠, ยกเคส)</li>
+</ul></div>
+</div>
+
+<p class="footnote">อ้างอิง: ไฟล์ "นี่คือแนวข้อสอบที่จะออกในปีนี้" (ประกาศอาจารย์) · เอกสาร Data Model Critique · รีวิวข้อสอบจากรุ่นพี่ ปี 66–67</p>
+</main>
+</div>
+
+<button id="toTop" title="กลับขึ้นด้านบน" aria-label="กลับขึ้นด้านบน">↑</button>
+<script src="assets/main.js"></script>
+</body>
+</html>
