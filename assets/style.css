@@ -335,12 +335,75 @@ details.ans[open] summary { margin-bottom: 6px; }
 
 /* back to top */
 #toTop {
-  position: fixed; right: 18px; bottom: 18px; z-index: 800;
+  position: fixed; right: 14px; bottom: 14px; z-index: 800;
   width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line);
   background: var(--card); color: var(--accent); font-size: 19px; cursor: pointer;
   box-shadow: var(--shadow); opacity: 0; pointer-events: none; transition: opacity .2s;
 }
 #toTop.show { opacity: 1; pointer-events: auto; }
+
+/* ---------- ระบบอ่านออกเสียง (TTS) ---------- */
+.tts-btn {
+  font-family: var(--font-thai); font-size: .72rem; font-weight: 700;
+  color: var(--accent-ink); background: var(--accent-soft);
+  border: 1px solid var(--line); border-radius: 999px;
+  padding: 2px 11px; cursor: pointer; white-space: nowrap;
+  vertical-align: middle; margin-left: .5rem;
+  transition: background .15s, color .15s, border-color .15s;
+}
+.tts-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+.tts-btn.on { background: var(--accent); color: #fff; border-color: var(--accent); }
+h3 .tts-btn, .tts-btn.tts-sub { font-size: .66rem; padding: 1px 9px; opacity: .85; }
+h3 .tts-btn:hover, .tts-btn.tts-sub:hover { opacity: 1; }
+.tts-btn.tts-step {
+  position: absolute; right: 12px; top: 12px; margin-left: 0;
+  font-size: .8rem; padding: 2px 8px; opacity: .6;
+}
+.step:hover .tts-btn.tts-step, .tts-btn.tts-step:hover { opacity: 1; }
+.tts-reading {
+  box-shadow: 0 0 0 2px var(--accent), 0 0 22px color-mix(in srgb, var(--accent) 30%, transparent);
+  border-radius: 14px;
+}
+h2.tts-reading, h3.tts-reading { color: var(--accent-ink); border-radius: 8px; }
+.tts-bar {
+  position: fixed; right: 14px; bottom: 68px; z-index: 810;
+  width: min(340px, calc(100vw - 28px));
+  background: var(--card); border: 1px solid var(--line); border-radius: 16px;
+  box-shadow: 0 10px 32px rgba(2, 8, 23, .22);
+  font-family: var(--font-thai); overflow: hidden;
+}
+.tts-bar-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 14px; background: var(--accent); color: #fff; cursor: pointer;
+}
+.tts-bar-title { font-weight: 700; font-size: .88rem; }
+.tts-fold {
+  background: none; border: none; color: #fff; font-size: .95rem;
+  cursor: pointer; padding: 0 4px;
+}
+.tts-bar.min .tts-bar-body { display: none; }
+.tts-bar-body { padding: 11px 14px 13px; display: grid; gap: 9px; }
+.tts-status { font-size: .8rem; color: var(--ink-soft); min-height: 1.2em; }
+.tts-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.tts-row label {
+  display: inline-flex; flex-direction: column; gap: 3px;
+  font-size: .72rem; font-weight: 700; color: var(--ink-soft); flex: 1 1 130px;
+}
+.tts-bar select {
+  font-family: var(--font-thai); font-size: .78rem; width: 100%;
+  padding: 4px 6px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--bg-soft); color: var(--ink);
+}
+.tts-bar-body > .tts-row button {
+  font-family: var(--font-thai); font-size: .78rem; font-weight: 700;
+  padding: 6px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--line); background: var(--bg-soft); color: var(--ink);
+}
+.tts-bar-body > .tts-row button:hover { border-color: var(--accent); color: var(--accent-ink); }
+.tts-stop { color: #be123c !important; }
+[data-theme="dark"] .tts-stop { color: #fb7185 !important; }
+.tts-hint { font-size: .72rem; color: var(--warn-ink); }
+[data-theme="dark"] .tts-bar { box-shadow: 0 10px 32px rgba(0, 0, 0, .55); }
 
 .footnote { color: var(--ink-soft); font-size: 14px; margin-top: 40px; border-top: 1px solid var(--line); padding-top: 14px; }
 
@@ -375,7 +438,7 @@ details.ans[open] summary { margin-bottom: 6px; }
 }
 
 @media print {
-  header.site, aside.toc, #toTop, #progress, #menuBtn { display: none !important; }
+  header.site, aside.toc, #toTop, #progress, #menuBtn, .tts-bar, .tts-btn { display: none !important; }
   .wrap { display: block; }
   .card, .box, .fig, .step { box-shadow: none; break-inside: avoid; }
   details.ans { display: block; }
